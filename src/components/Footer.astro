@@ -72,6 +72,14 @@ import Icon from '@/components/Icon.astro';
           <li>
             <a
               class="footer-link"
+              href={`mailto:${businessInfo.contactEmail}`}
+            >
+              {businessInfo.contactEmail}
+            </a>
+          </li>
+          <li>
+            <a
+              class="footer-link"
               href={publicEnv.PUBLIC_INSTAGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"

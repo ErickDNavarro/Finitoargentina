@@ -74,7 +74,7 @@ const localBusinessSchema = {
   image: ogImageUrl,
   logo: logoUrl,
   telephone: businessInfo.telephone,
-  email: businessInfo.email,
+  email: businessInfo.contactEmail,
   priceRange: businessInfo.priceRange,
   currenciesAccepted: businessInfo.currenciesAccepted,
   paymentAccepted: businessInfo.paymentAccepted,
@@ -149,7 +149,7 @@ const organizationSchema = {
   contactPoint: {
     '@type': 'ContactPoint',
     telephone: businessInfo.telephone,
-    email: businessInfo.email,
+    email: businessInfo.contactEmail,
     contactType: 'sales',
     areaServed: 'AR',
     availableLanguage: ['es', 'es-AR'],

@@ -11,7 +11,14 @@ export const businessInfo = {
     'Tequeños venezolanos al por mayor para restaurantes, bares y eventos en CABA y Zona Norte. Primer pedido a consignación: sin riesgo, sin stock parado.',
   url: 'https://finitoargentina.com',
   telephone: '+5491155270357',
+  /** Email backend — donde llegan los leads del form (Resend → Gmail) */
   email: 'finitoargentina@gmail.com',
+  /** Email público principal — aparece en footer y schema (forward a Gmail vía Cloudflare) */
+  contactEmail: 'hola@finitoargentina.com',
+  /** Email comercial — cerca del CTA revendedor */
+  salesEmail: 'ventas@finitoargentina.com',
+  /** Email eventos — cerca de catering */
+  eventsEmail: 'eventos@finitoargentina.com',
   priceRange: '$$',
   currenciesAccepted: 'ARS',
   paymentAccepted: 'Efectivo, Transferencia, Mercado Pago',

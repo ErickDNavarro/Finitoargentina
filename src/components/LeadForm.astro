@@ -2,6 +2,7 @@
 import { formulario } from '@/data/content';
 import { whatsappLinks } from '@/lib/whatsapp';
 import { publicEnv } from '@/lib/env';
+import { businessInfo } from '@/data/seo';
 import Eyebrow from '@/components/Eyebrow.astro';
 import Icon from '@/components/Icon.astro';
 
@@ -22,18 +23,34 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
           <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 460px;">
             {formulario.subtitulo}
           </p>
-          <a
-            href={whatsappLinks.revendedor}
-            target="_blank"
-            rel="noopener noreferrer"
-            style="display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; color: var(--color-text-primary); font-weight: 600;"
-            data-analytics="form-alt-whatsapp"
-          >
-            <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
-              <Icon name="whatsapp" size={22} />
-            </span>
-            O escribinos por WhatsApp
-          </a>
+          <div style="margin-top: 28px; display: flex; flex-direction: column; gap: 14px;">
+            <a
+              href={whatsappLinks.revendedor}
+              target="_blank"
+              rel="noopener noreferrer"
+              style="display: inline-flex; align-items: center; gap: 12px; color: var(--color-text-primary); font-weight: 600;"
+              data-analytics="form-alt-whatsapp"
+            >
+              <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center; flex: none;">
+                <Icon name="whatsapp" size={22} />
+              </span>
+              <span>O por WhatsApp</span>
+            </a>
+
+            <a
+              href={`mailto:${businessInfo.salesEmail}?subject=Quiero%20ser%20revendedor`}
+              style="display: inline-flex; align-items: center; gap: 12px; color: var(--color-text-primary); font-weight: 600;"
+              data-analytics="form-alt-email"
+            >
+              <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center; flex: none;">
+                <Icon name="phone" size={20} />
+              </span>
+              <span>
+                Por mail<br/>
+                <span style="font-size: 13px; color: var(--color-text-muted); font-weight: 500;">{businessInfo.salesEmail}</span>
+              </span>
+            </a>
+          </div>
 
           <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 14px;">
             <div style="display: flex; align-items: center; gap: 10px; color: var(--color-text-muted); font-size: 13px;">
