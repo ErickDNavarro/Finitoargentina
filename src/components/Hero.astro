@@ -108,3 +108,53 @@ const stats = [
     </div>
   </div>
 </section>
+
+<style>
+  /* Halo grande detrás de la foto del tequeño */
+  .hero-halo {
+    position: absolute;
+    inset: -40px;
+    width: calc(100% + 80px);
+    height: calc(100% + 80px);
+    object-fit: cover;
+    border-radius: 50%;
+    opacity: 0.4;
+    filter: blur(40px) saturate(1.5) brightness(1.2);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Watermark del tequeño detrás del headline (lateral izquierdo) */
+  .hero-watermark-bg {
+    position: absolute;
+    top: 50%;
+    left: -160px;
+    width: 540px;
+    height: auto;
+    transform: translateY(-50%) rotate(-18deg);
+    opacity: 0.18;
+    filter: blur(18px) saturate(1.4) brightness(1.1);
+    pointer-events: none;
+    z-index: 0;
+    object-fit: contain;
+    max-width: 80%;
+  }
+  @media (min-width: 768px) {
+    .hero-watermark-bg {
+      left: -120px;
+      width: 680px;
+      max-width: 50%;
+      opacity: 0.22;
+    }
+  }
+  @media (min-width: 1024px) {
+    .hero-watermark-bg {
+      left: -60px;
+      width: 760px;
+      opacity: 0.25;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-watermark-bg { transform: translateY(-50%) rotate(0); }
+  }
+</style>
