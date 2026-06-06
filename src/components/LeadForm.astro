@@ -159,6 +159,28 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
   @media (min-width: 640px) {
     .form-card { border-radius: var(--radius-lg); padding: 28px; }
   }
+
+  /* Turnstile widget — Cloudflare tiene min-width 300px que no podemos cambiar,
+     así que escalamos visualmente en mobile para que entre */
+  #turnstile-container {
+    display: flex;
+    justify-content: flex-start;
+    min-height: 65px;
+  }
+  @media (max-width: 480px) {
+    #turnstile-container {
+      transform: scale(0.78);
+      transform-origin: left top;
+      margin-bottom: -14px;
+    }
+  }
+  @media (min-width: 481px) and (max-width: 640px) {
+    #turnstile-container {
+      transform: scale(0.92);
+      transform-origin: left top;
+      margin-bottom: -5px;
+    }
+  }
 </style>
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
