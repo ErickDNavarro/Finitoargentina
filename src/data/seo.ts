@@ -121,5 +121,5 @@ export const seoMeta = {
   ogImageAlt: 'Tequeños venezolanos artesanales — Finito Argentina',
   language: 'es-AR',
   /** Pegá acá el token de Google Search Console cuando lo tengas. Sin tocar nada más. */
-  googleSiteVerification: '',
+  googleSiteVerification: 'x18U-ULyAyIZw4fkR5cfR858dAu79UrBkWSv2LBZwx4',
 } as const;
