@@ -1,0 +1,52 @@
+---
+import { catering } from '@/data/content';
+import { whatsappLinks } from '@/lib/whatsapp';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+
+const tipos = ['Cumpleaños', 'Casamientos', 'After-office', 'Corporativos'];
+---
+
+<section id="eventos" class="section relative overflow-hidden">
+  <div class="glow-blob" style="width: 420px; height: 420px; background: rgba(251,176,59,0.12); top: 40px; left: 50%; transform: translateX(-50%);"></div>
+
+  <div class="container-finito relative z-[1]">
+    <div class="reveal" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden;">
+      <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
+      <div class="grid md:grid-cols-[1.3fr_auto] md:items-center" style="position: relative; z-index: 1; gap: var(--space-7);">
+        <div>
+          <Eyebrow>{catering.eyebrow}</Eyebrow>
+          <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px; max-width: 16ch;">
+            ¿Tenés un evento?<br/><span class="text-shimmer">Llegan</span> recién hechos
+          </h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 540px;">
+            {catering.texto}
+          </p>
+          <ul style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: 24px; padding: 0; list-style: none;">
+            {tipos.map((t) => (
+              <li style="display: inline-flex; align-items: center; gap: 8px; font-size: 14px; color: var(--color-text-secondary);">
+                <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent);"></span>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="flex md:flex-col" style="gap: var(--space-3); justify-content: center;">
+          <a
+            href={whatsappLinks.catering}
+            class="btn btn-whatsapp btn-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics="catering-cta-whatsapp"
+          >
+            <Icon name="whatsapp" size={20} />
+            {catering.cta}
+          </a>
+          <p style="margin: 0; font-size: 12px; color: var(--color-text-muted); text-align: center;">
+            Te cotizamos en el día
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

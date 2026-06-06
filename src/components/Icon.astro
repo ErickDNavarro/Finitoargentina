@@ -1,0 +1,94 @@
+---
+// Iconos Lucide-style (line, 2.2 stroke, 24 grid) — del Finito Design System
+export interface Props {
+  name:
+    | 'arrow-right'
+    | 'arrow-up-right'
+    | 'flame'
+    | 'truck'
+    | 'party-popper'
+    | 'store'
+    | 'snowflake'
+    | 'clock'
+    | 'star'
+    | 'check'
+    | 'phone'
+    | 'instagram'
+    | 'whatsapp'
+    | 'menu'
+    | 'map-pin'
+    | 'leaf'
+    | 'lock'
+    | 'beer';
+  size?: number;
+  stroke?: number;
+  class?: string;
+}
+
+const { name, size = 22, stroke = 2.2, class: className = '' } = Astro.props;
+
+const paths: Record<Props['name'], { d?: string; svg?: string; filled?: boolean }> = {
+  'arrow-right': { svg: '<path d="M5 12h14"/><path d="m13 6 6 6-6 6"/>' },
+  'arrow-up-right': { svg: '<path d="M7 17 17 7"/><path d="M7 7h10v10"/>' },
+  flame: { d: 'M12 2c1 3 4 4.5 4 8a4 4 0 0 1-8 0c0-1 .3-1.8.8-2.5C8 9 7 11 7 13a5 5 0 0 0 10 0c0-4-3-6-5-11Z' },
+  truck: {
+    svg: '<path d="M14 18V6a1 1 0 0 0-1-1H2v13"/><path d="M14 9h4l4 4v5h-8"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/>',
+  },
+  'party-popper': {
+    svg: '<path d="M5.8 11.3 2 22l10.7-3.79"/><path d="M4 3h.01M22 8h.01M15 2h.01M22 20h.01"/><path d="m11 13 9 9"/><path d="M22 14a5 5 0 0 0-8-4 5 5 0 0 0-7 0"/>',
+  },
+  store: {
+    svg: '<path d="m2 7 1.5-3.5A1 1 0 0 1 4.4 3h15.2a1 1 0 0 1 .9.5L22 7"/><path d="M4 7v13h16V7"/><path d="M2 7h20"/><path d="M9 20v-6h6v6"/>',
+  },
+  snowflake: {
+    svg: '<path d="M12 2v20M2 12h20"/><path d="m4.9 4.9 14.2 14.2M19.1 4.9 4.9 19.1"/>',
+  },
+  clock: { svg: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>' },
+  star: { d: 'M12 2 15 8.5 22 9.3l-5 4.6 1.3 7L12 17.8 5.7 21l1.3-7-5-4.6 7-.8Z', filled: true },
+  check: { d: 'M5 12.5 9.5 17 19 6.5' },
+  phone: {
+    d: 'M13.8 19.8a17 17 0 0 1-9.6-9.6L6 8.3a1.5 1.5 0 0 0 .4-1.6L5.3 3.9A1.5 1.5 0 0 0 3.8 3H3a2 2 0 0 0-2 2.2A18 18 0 0 0 18.8 23 2 2 0 0 0 21 21v-.8a1.5 1.5 0 0 0-.9-1.5l-2.8-1.1a1.5 1.5 0 0 0-1.6.4Z',
+  },
+  instagram: {
+    svg: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/>',
+  },
+  whatsapp: {
+    d: 'M3 21l1.6-4.8A8 8 0 1 1 8 19l-5 2Zm6-12a1 1 0 0 0-1 1c0 3 2.5 5.5 5.5 5.5a1 1 0 0 0 1-1c0-.4-.2-.7-.6-.9l-1.2-.5-.9.9c-1-.4-1.8-1.2-2.2-2.2l.9-.9-.5-1.2A1 1 0 0 0 9 9Z',
+  },
+  menu: { svg: '<path d="M3 6h18M3 12h18M3 18h18"/>' },
+  'map-pin': {
+    svg: '<path d="M12 21s7-6 7-11a7 7 0 0 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.5"/>',
+  },
+  leaf: {
+    svg: '<path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.5 19 2c1 2 2 4.5 2 8a7 7 0 0 1-7 7c-2 0-3-.5-3-.5"/><path d="M2 22c2-3 4-5 8-7"/>',
+  },
+  lock: {
+    svg: '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  },
+  beer: {
+    svg: '<path d="M17 11h1a3 3 0 0 1 0 6h-1"/><path d="M9 12v6"/><path d="M13 12v6"/><path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5C9.44 3.5 10 3 12 3s2.56.5 3.5.5c.93 0 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5z"/><path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8"/>',
+  },
+};
+
+const entry = paths[name];
+const filled = entry.filled === true;
+---
+
+<svg
+  width={size}
+  height={size}
+  viewBox="0 0 24 24"
+  fill={filled ? 'currentColor' : 'none'}
+  stroke={filled ? 'none' : 'currentColor'}
+  stroke-width={stroke}
+  stroke-linecap="round"
+  stroke-linejoin="round"
+  class={className}
+  aria-hidden="true"
+>
+  {entry.svg ? (
+    <Fragment set:html={entry.svg} />
+  ) : (
+    <path d={entry.d} />
+  )}
+</svg>

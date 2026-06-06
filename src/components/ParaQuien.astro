@@ -1,0 +1,60 @@
+---
+import { paraQuien } from '@/data/content';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+
+const iconMap: Record<string, 'store' | 'beer' | 'party-popper'> = {
+  utensils: 'store',
+  beer: 'beer',
+  party: 'party-popper',
+};
+
+const tagLabel: Record<string, string> = {
+  mayorista: 'Mayorista',
+  evento: 'Evento',
+};
+
+const ejemplos: Record<string, string> = {
+  utensils: 'Lo sumamos a la entrada para compartir. Sale en 4 min y queda de cocina del bueno en la foto.',
+  beer: 'Picada de bar. Va con cerveza, va con vermut, va con todo. Se mueve solo en after-office.',
+  party: 'Cumple de 50 personas. Llegaron calientes y se acabaron en 15 minutos.',
+};
+---
+
+<section id="para-quien" class="section section-alt">
+  <div class="container-finito">
+    <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+      <div style="display: flex; justify-content: center;"><Eyebrow>{paraQuien.eyebrow}</Eyebrow></div>
+      <h2 style="text-align: center;">¿Es para vos?</h2>
+      <p style="text-align: center;">Tres formatos, tres tipos de negocio. Si te encontrás en alguno, te conviene probar.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3" style="gap: var(--space-5); margin-top: var(--space-7);">
+      {paraQuien.segmentos.map((s, i) => {
+        const featured = i === 1;
+        return (
+          <div class={`reveal d${i + 1} card ${featured ? 'card-accent' : ''}`} style={`position: relative; text-align: center; padding: var(--space-6); ${featured ? 'background: linear-gradient(180deg, rgba(251,176,59,0.10), var(--color-surface-card));' : ''}`}>
+            {featured && (
+              <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%);">
+                <span class="badge badge-accent">Más común</span>
+              </div>
+            )}
+            <span style="display: inline-flex; width: 52px; height: 52px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); align-items: center; justify-content: center; margin-bottom: 18px;">
+              <Icon name={iconMap[s.icono] ?? 'store'} size={24} />
+            </span>
+            <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 19px; line-height: 1.15;">{s.titulo}</div>
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-top: 10px; line-height: 1.55;">{s.texto}</p>
+            <blockquote style="margin: 20px 0 0; padding: 14px; background: var(--color-eerie-900); border-left: 2px solid var(--color-accent); border-radius: 0 8px 8px 0; text-align: left;">
+              <span style="font-size: 13px; color: var(--color-text-muted); font-style: italic; line-height: 1.5;">"{ejemplos[s.icono]}"</span>
+            </blockquote>
+            <div style="margin-top: 18px; display: flex; justify-content: center;">
+              <span class={`badge ${s.tag === 'mayorista' ? 'badge-soft' : 'badge-outline'}`}>
+                {tagLabel[s.tag] ?? s.tag}
+              </span>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>

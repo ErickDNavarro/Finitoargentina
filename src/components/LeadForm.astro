@@ -1,0 +1,256 @@
+---
+import { formulario } from '@/data/content';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { publicEnv } from '@/lib/env';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+
+const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
+---
+
+<section id="formulario" class="section relative overflow-hidden">
+  <div class="glow-blob" style="width: 460px; height: 460px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
+
+  <div class="container-finito">
+    <div style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden;">
+      <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
+
+      <div class="grid lg:grid-cols-2 relative z-[1]" style="gap: var(--space-7);">
+        <div class="reveal">
+          <Eyebrow>{formulario.eyebrow}</Eyebrow>
+          <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">Mandanos tus datos. <span class="text-shimmer">Te escribimos hoy</span></h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 460px;">
+            {formulario.subtitulo}
+          </p>
+          <a
+            href={whatsappLinks.revendedor}
+            target="_blank"
+            rel="noopener noreferrer"
+            style="display: inline-flex; align-items: center; gap: 12px; margin-top: 28px; color: var(--color-text-primary); font-weight: 600;"
+            data-analytics="form-alt-whatsapp"
+          >
+            <span style="width: 44px; height: 44px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+              <Icon name="whatsapp" size={22} />
+            </span>
+            O escribinos por WhatsApp
+          </a>
+
+          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 14px;">
+            <div style="display: flex; align-items: center; gap: 10px; color: var(--color-text-muted); font-size: 13px;">
+              <Icon name="lock" size={16} class="opacity-70" />
+              {formulario.privacidad}
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal d2">
+          <form
+            id="lead-form"
+            novalidate
+            style="background: var(--color-surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); box-shadow: var(--edge-light);"
+          >
+            <div class="grid sm:grid-cols-2" style="gap: var(--space-4);">
+              <div>
+                <label class="form-label" for="lead-nombre">Tu nombre <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <input id="lead-nombre" name="nombre" type="text" class="input-field" required autocomplete="name" placeholder="Damián López" maxlength="80" />
+                </div>
+                <p class="form-error" data-error="nombre" hidden></p>
+              </div>
+              <div>
+                <label class="form-label" for="lead-negocio">Tu negocio <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <input id="lead-negocio" name="negocio" type="text" class="input-field" required placeholder="Bar El Palacio" maxlength="100" />
+                </div>
+                <p class="form-error" data-error="negocio" hidden></p>
+              </div>
+            </div>
+
+            <div class="grid sm:grid-cols-2" style="gap: var(--space-4);">
+              <div>
+                <label class="form-label" for="lead-tipo">Tipo <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <select id="lead-tipo" name="tipo" class="input-field" required>
+                    <option value="">Elegí</option>
+                    <option value="restaurante">Restaurante</option>
+                    <option value="bar">Bar / cervecería</option>
+                    <option value="otro">Otro</option>
+                  </select>
+                </div>
+                <p class="form-error" data-error="tipo" hidden></p>
+              </div>
+              <div>
+                <label class="form-label" for="lead-zona">Zona <span class="req">*</span></label>
+                <div class="input-wrap">
+                  <input id="lead-zona" name="zona" type="text" class="input-field" required placeholder="Núñez, CABA" maxlength="80" />
+                </div>
+                <p class="form-error" data-error="zona" hidden></p>
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="lead-contacto">Email o teléfono <span class="req">*</span></label>
+              <div class="input-wrap">
+                <input id="lead-contacto" name="contacto" type="text" class="input-field" required placeholder="11 2345-6789 o vos@negocio.com" autocomplete="email" maxlength="120" />
+              </div>
+              <p class="form-error" data-error="contacto" hidden></p>
+            </div>
+
+            <div>
+              <label class="form-label" for="lead-mensaje">Mensaje <span style="color: var(--color-text-muted); font-weight: 400; letter-spacing: 0;">(opcional)</span></label>
+              <div class="input-wrap" style="height: auto; min-height: 90px; align-items: stretch; padding-block: 0;">
+                <textarea id="lead-mensaje" name="mensaje" class="input-field" rows="3" placeholder="Contanos cuánto se mueve tu local, qué te interesa probar..." maxlength="800"></textarea>
+              </div>
+              <p class="form-error" data-error="mensaje" hidden></p>
+            </div>
+
+            {/* Honeypot */}
+            <div class="hp-field" aria-hidden="true">
+              <label for="lead-website">No completar este campo</label>
+              <input id="lead-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+
+            <div id="turnstile-container" data-sitekey={turnstileSiteKey} class="cf-turnstile" data-theme="dark"></div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-full" data-analytics="form-submit">
+              <span data-label="idle">Quiero ser revendedor</span>
+              <span data-label="loading" hidden>Enviando…</span>
+              <Icon name="arrow-right" size={17} />
+            </button>
+
+            <p style="margin: 0; font-size: 12px; color: var(--color-text-muted); text-align: center;">
+              Te respondemos en menos de 24 h hábiles.
+            </p>
+            <p class="form-error" style="text-align: center;" data-error="__global" role="alert" hidden></p>
+          </form>
+
+          <div id="lead-success" class="hidden" style="background: var(--color-surface-card); border: 1px solid rgba(251, 176, 59, 0.35); border-radius: var(--radius-lg); padding: var(--space-7); text-align: center;" role="status" aria-live="polite">
+            <span style="display: inline-flex; width: 64px; height: 64px; border-radius: 50%; background: var(--color-accent); color: var(--color-text-on-accent); align-items: center; justify-content: center; margin-bottom: 18px;">
+              <Icon name="check" size={32} />
+            </span>
+            <h3 style="margin: 0 0 8px; font-family: var(--font-display); text-transform: uppercase; font-size: 24px;">{formulario.exitoTitulo}</h3>
+            <p style="margin: 0; color: var(--color-text-secondary);">{formulario.exitoTexto}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+
+<script>
+  function showFieldError(form: HTMLFormElement, field: string, message: string): void {
+    const el = form.querySelector<HTMLElement>(`[data-error="${field}"]`);
+    if (el) {
+      el.textContent = message;
+      el.hidden = false;
+    }
+    const input = form.querySelector<HTMLElement>(`[name="${field}"]`);
+    if (input) {
+      input.setAttribute('aria-invalid', 'true');
+      const wrap = input.closest<HTMLElement>('.input-wrap');
+      if (wrap) wrap.dataset.invalid = 'true';
+    }
+  }
+
+  function clearErrors(form: HTMLFormElement): void {
+    form.querySelectorAll<HTMLElement>('[data-error]').forEach((el) => {
+      el.textContent = '';
+      el.hidden = true;
+    });
+    form.querySelectorAll<HTMLElement>('[aria-invalid="true"]').forEach((el) => {
+      el.removeAttribute('aria-invalid');
+    });
+    form.querySelectorAll<HTMLElement>('.input-wrap[data-invalid="true"]').forEach((el) => {
+      el.removeAttribute('data-invalid');
+    });
+  }
+
+  function setLoading(form: HTMLFormElement, loading: boolean): void {
+    const btn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    if (!btn) return;
+    btn.disabled = loading;
+    const idle = btn.querySelector<HTMLElement>('[data-label="idle"]');
+    const load = btn.querySelector<HTMLElement>('[data-label="loading"]');
+    if (idle) idle.hidden = loading;
+    if (load) load.hidden = !loading;
+  }
+
+  function getTurnstileToken(): string {
+    const w = window as unknown as { turnstile?: { getResponse: (el?: Element | string) => string | undefined } };
+    if (!w.turnstile) return '';
+    const container = document.getElementById('turnstile-container');
+    return w.turnstile.getResponse(container ?? undefined) ?? '';
+  }
+
+  function resetTurnstile(): void {
+    const w = window as unknown as { turnstile?: { reset: (el?: Element | string) => void } };
+    const container = document.getElementById('turnstile-container');
+    if (w.turnstile && container) {
+      try { w.turnstile.reset(container); } catch { /* noop */ }
+    }
+  }
+
+  function initLeadForm(): void {
+    const form = document.getElementById('lead-form') as HTMLFormElement | null;
+    const successEl = document.getElementById('lead-success');
+    if (!form || !successEl) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      clearErrors(form);
+      setLoading(form, true);
+
+      const data = new FormData(form);
+      const payload = {
+        nombre: String(data.get('nombre') ?? ''),
+        negocio: String(data.get('negocio') ?? ''),
+        tipo: String(data.get('tipo') ?? ''),
+        zona: String(data.get('zona') ?? ''),
+        contacto: String(data.get('contacto') ?? ''),
+        mensaje: String(data.get('mensaje') ?? ''),
+        website: String(data.get('website') ?? ''),
+        turnstileToken: getTurnstileToken(),
+      };
+
+      try {
+        const res = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        if (res.ok) {
+          form.hidden = true;
+          successEl.classList.remove('hidden');
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
+
+        let bodyJson: { error?: { code?: string; message?: string; fields?: Partial<Record<string, string>> } } = {};
+        try { bodyJson = await res.json(); } catch { /* noop */ }
+
+        const err = bodyJson.error;
+        if (err?.fields) {
+          for (const [field, message] of Object.entries(err.fields)) {
+            if (message) showFieldError(form, field, message);
+          }
+        }
+        showFieldError(form, '__global', err?.message ?? 'No pudimos enviar el formulario. Probá de nuevo o escribinos por WhatsApp.');
+        resetTurnstile();
+      } catch {
+        showFieldError(form, '__global', 'No pudimos conectarnos. Revisá tu internet o escribinos por WhatsApp.');
+        resetTurnstile();
+      } finally {
+        setLoading(form, false);
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLeadForm);
+  } else {
+    initLeadForm();
+  }
+</script>

@@ -1,0 +1,75 @@
+---
+import logoHorizontal from '@/assets/brand/logo-horizontal.svg';
+import { Image } from 'astro:assets';
+---
+
+<header
+  id="site-header"
+  class="fixed top-0 left-0 right-0 z-50"
+  style="transition: background var(--dur-base) var(--ease-out), border-color var(--dur-base) var(--ease-out), backdrop-filter var(--dur-base); border-bottom: 1px solid transparent;"
+>
+  <div class="container-finito flex items-center justify-between h-[76px]">
+    <a href="#top" class="flex items-center" aria-label="Finito Argentina — Inicio">
+      <Image
+        src={logoHorizontal}
+        alt="Finito Argentina"
+        width={180}
+        height={42}
+        loading="eager"
+        class="h-[34px] w-auto"
+      />
+    </a>
+
+    <nav aria-label="Navegación principal" class="hidden md:block">
+      <ul class="flex items-center" style="gap: var(--space-6);">
+        <li><a href="#consignacion" class="navlink">Sin riesgo</a></li>
+        <li><a href="#productos" class="navlink">Productos</a></li>
+        <li><a href="#eventos" class="navlink">Eventos</a></li>
+        <li><a href="#sobre" class="navlink">Sobre Finito</a></li>
+      </ul>
+    </nav>
+
+    <a href="#formulario" class="btn btn-primary btn-sm" data-analytics="nav-cta-revendedor">
+      Pedí al por mayor
+    </a>
+  </div>
+</header>
+
+<style>
+  .navlink {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: color var(--dur-fast) var(--ease-out);
+    text-decoration: none;
+  }
+  .navlink:hover {
+    color: var(--color-text-primary);
+  }
+  #site-header[data-scrolled='true'] {
+    background: var(--glass-dark);
+    backdrop-filter: blur(var(--blur-glass));
+    -webkit-backdrop-filter: blur(var(--blur-glass));
+    border-bottom-color: var(--border-subtle);
+  }
+  /* Push the page so content doesn't sit under the fixed nav at the apex */
+  :global(body) {
+    padding-top: 0;
+  }
+  @media (max-width: 720px) {
+    nav ul { display: none; }
+  }
+</style>
+
+<script is:inline>
+  (() => {
+    const el = document.getElementById('site-header');
+    if (!el) return;
+    const update = () => {
+      if (window.scrollY > 24) el.setAttribute('data-scrolled', 'true');
+      else el.removeAttribute('data-scrolled');
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>

@@ -1,0 +1,24 @@
+---
+// Barra de progreso de scroll fija en el tope, naranja con glow
+---
+
+<div
+  id="scroll-progress-bar"
+  aria-hidden="true"
+  class="fixed top-0 left-0 h-[3px] w-0 z-[90] pointer-events-none"
+  style="background: linear-gradient(90deg, var(--color-orange-600), var(--color-orange-400)); box-shadow: var(--glow-orange-md); transition: width 80ms linear;"
+></div>
+
+<script is:inline>
+  (() => {
+    const bar = document.getElementById('scroll-progress-bar');
+    if (!bar) return;
+    const update = () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      const p = h > 0 ? (window.scrollY / h) * 100 : 0;
+      bar.style.width = p + '%';
+    };
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+</script>

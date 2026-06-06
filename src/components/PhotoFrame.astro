@@ -1,0 +1,32 @@
+---
+export interface Props {
+  src?: string;
+  alt?: string;
+  placeholder: string;
+  flat?: boolean;
+  aspect?: string;
+  class?: string;
+}
+
+const {
+  src,
+  alt = '',
+  placeholder,
+  flat = false,
+  aspect = '4/3',
+  class: className = '',
+} = Astro.props;
+---
+
+<div
+  class={`photo-frame ${flat ? 'flat' : ''} ${className}`}
+  style={`aspect-ratio: ${aspect};`}
+>
+  {src ? (
+    <img src={src} alt={alt} loading="lazy" decoding="async" />
+  ) : (
+    <div class="photo-placeholder">
+      <span>{placeholder}</span>
+    </div>
+  )}
+</div>

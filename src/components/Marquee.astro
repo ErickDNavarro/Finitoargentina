@@ -1,0 +1,27 @@
+---
+const items = [
+  'Sin conservantes',
+  'Hechos a mano',
+  'Congelado al instante',
+  'Queso que estira',
+  'Listos en 4 minutos',
+  'Receta de la abuela',
+  'Por mayor y eventos',
+  'CABA y Zona Norte',
+];
+const row = [...items, ...items];
+---
+
+<div
+  class="relative overflow-hidden"
+  style="border-block: 1px solid var(--border-subtle); background: var(--color-eerie-900); padding-block: 18px;"
+>
+  <div class="flex anim-marquee" style="gap: 56px; width: max-content;">
+    {row.map((t) => (
+      <span class="inline-flex items-center whitespace-nowrap" style="gap: 16px; color: var(--color-text-secondary); font-weight: 600; font-size: 15px;">
+        {t}
+        <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-accent);"></span>
+      </span>
+    ))}
+  </div>
+</div>

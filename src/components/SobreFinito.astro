@@ -1,0 +1,38 @@
+---
+import { sobreFinito } from '@/data/content';
+import isoLogo from '@/assets/brand/iso.svg';
+import { Image } from 'astro:assets';
+import Eyebrow from '@/components/Eyebrow.astro';
+---
+
+<section id="sobre" class="section">
+  <div class="container-finito">
+    <div class="reveal" style="max-width: 720px; margin-inline: auto; text-align: center;">
+      <div style="display: inline-flex; align-items: center; justify-content: center; width: 80px; height: 80px; border-radius: var(--radius-lg); background: linear-gradient(180deg, var(--orange-glow), transparent); border: 1px solid rgba(251, 176, 59, 0.2); margin-bottom: 28px;">
+        <Image src={isoLogo} alt="" width={44} height={44} class="opacity-90" />
+      </div>
+      <div style="display: flex; justify-content: center;"><Eyebrow>{sobreFinito.eyebrow}</Eyebrow></div>
+      <h2 style="text-align: center; margin: 20px 0 20px; max-width: 22ch; margin-inline: auto;">
+        Una receta venezolana, <span class="text-shimmer">hecha acá</span>
+      </h2>
+      <p style="font-size: var(--fs-body-lg); color: var(--color-text-secondary); margin: 0;">
+        {sobreFinito.texto}
+      </p>
+
+      <div class="grid grid-cols-3" style="gap: var(--space-5); margin-top: 48px; padding-top: 32px; border-top: 1px solid var(--border-subtle); max-width: 480px; margin-inline: auto;">
+        <div>
+          <div style="font-family: var(--font-display); font-size: 22px; color: var(--color-accent); line-height: 1;">VZLA</div>
+          <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 6px; letter-spacing: 0.08em; text-transform: uppercase;">Origen</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 22px; color: var(--color-text-primary); line-height: 1;">Familia</div>
+          <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 6px; letter-spacing: 0.08em; text-transform: uppercase;">No fábrica</div>
+        </div>
+        <div>
+          <div style="font-family: var(--font-display); font-size: 22px; color: var(--color-text-primary); line-height: 1;">CABA</div>
+          <div style="font-size: 11px; color: var(--color-text-muted); margin-top: 6px; letter-spacing: 0.08em; text-transform: uppercase;">+ Zona Norte</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

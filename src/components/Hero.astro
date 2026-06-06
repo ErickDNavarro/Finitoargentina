@@ -1,0 +1,93 @@
+---
+import { hero } from '@/data/content';
+import { whatsappLinks } from '@/lib/whatsapp';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+
+const stats = [
+  { value: '0', prefix: '$', suffix: '', label: 'De inversión inicial' },
+  { value: '4', prefix: '', suffix: ' min', label: 'Del freezer a la mesa' },
+  { value: '24', prefix: '', suffix: ' h', label: 'Te contestamos' },
+];
+---
+
+<section
+  id="top"
+  class="relative overflow-hidden"
+  style="padding-top: 148px; padding-bottom: var(--space-9);"
+>
+  <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(251,176,59,0.20); top: -120px; right: -80px;"></div>
+  <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.10); bottom: -120px; left: -120px;"></div>
+
+  <div class="container-finito relative z-[1]">
+    <div class="grid lg:grid-cols-2 lg:items-center gap-12 lg:gap-16">
+      {/* Copy */}
+      <div>
+        <div class="reveal is-visible"><Eyebrow>{hero.eyebrow}</Eyebrow></div>
+        <h1
+          class="reveal is-visible d1 text-balance"
+          style="font-size: clamp(2.8rem, 6vw, 4.8rem); line-height: 0.98; margin: 20px 0 0;"
+        >
+          El tequeño<br/>que tu local<br/><span class="text-shimmer">necesita</span>
+        </h1>
+        <p class="reveal is-visible d2 text-pretty" style="font-size: var(--fs-body-lg); color: var(--color-text-secondary); max-width: 470px; margin: 24px 0 0;">
+          {hero.subtitulo}
+        </p>
+        <div class="reveal is-visible d3 flex flex-wrap" style="gap: var(--space-3); margin-top: var(--space-6);">
+          <a href="#formulario" class="btn btn-primary btn-lg" data-analytics="hero-cta-revendedor">
+            {hero.ctaPrimario}
+            <Icon name="arrow-right" size={18} />
+          </a>
+          <a
+            href={whatsappLinks.catering}
+            class="btn btn-secondary btn-lg"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-analytics="hero-cta-catering"
+          >
+            {hero.ctaSecundario}
+          </a>
+        </div>
+        <div class="reveal is-visible d4 flex flex-wrap" style="gap: var(--space-6); margin-top: var(--space-7);">
+          {stats.map((s, i) => (
+            <>
+              {i > 0 && <div style="width: 1px; background: var(--border-subtle); align-self: stretch;"></div>}
+              <div>
+                <div style="font-family: var(--font-display); font-size: 28px; color: var(--color-text-primary); line-height: 1;">
+                  {s.prefix}{s.value}{s.suffix}
+                </div>
+                <div style="font-size: 12px; color: var(--color-text-muted); margin-top: 4px; letter-spacing: 0.05em;">
+                  {s.label}
+                </div>
+              </div>
+            </>
+          ))}
+        </div>
+      </div>
+
+      {/* Photo */}
+      <div class="reveal is-visible d2 relative">
+        <PhotoFrame
+          src="/fotos/hero.jpg"
+          alt="Tequeño recién frito con vapor sobre superficie oscura"
+          placeholder="Foto: tequeños recién fritos"
+          aspect="4/5"
+          class="lg:aspect-square"
+        />
+        <div class="hidden sm:block absolute anim-bob" style="left: -22px; bottom: 60px; z-index: 2;">
+          <span class="glass-chip">
+            <span class="icon"><Icon name="flame" size={18} /></span>
+            Recién fritos
+          </span>
+        </div>
+        <div class="hidden sm:block absolute anim-bob" style="right: -16px; top: 48px; z-index: 2; animation-delay: 1.2s;">
+          <span class="glass-chip">
+            <span class="icon"><Icon name="star" size={16} /></span>
+            Queso que estira
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,18 @@
+---
+import { whatsappLinks } from '@/lib/whatsapp';
+import Icon from '@/components/Icon.astro';
+---
+
+<a
+  href={whatsappLinks.general}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Escribinos por WhatsApp"
+  data-analytics="whatsapp-float"
+  style="position: fixed; bottom: 24px; right: 24px; z-index: 40; display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: #25D366; color: white; box-shadow: 0 12px 32px -10px rgba(37, 211, 102, 0.7); transition: transform var(--dur-base) var(--ease-spring);"
+  onmouseenter="this.style.transform='scale(1.08)'"
+  onmouseleave="this.style.transform='scale(1)'"
+  class="md:hidden"
+>
+  <Icon name="whatsapp" size={28} />
+</a>

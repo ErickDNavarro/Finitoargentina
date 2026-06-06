@@ -1,0 +1,75 @@
+---
+import { productos } from '@/data/productos';
+import { productos_intro } from '@/data/content';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+---
+
+<section id="productos" class="section">
+  <div class="container-finito">
+    <div class="section-head reveal">
+      <Eyebrow>{productos_intro.eyebrow}</Eyebrow>
+      <h2>Elegí tu formato</h2>
+      <p>{productos_intro.subtitulo}</p>
+    </div>
+
+    <div class="grid md:grid-cols-2" style="gap: var(--space-6); margin-top: var(--space-7);">
+      {productos.map((p, i) => (
+        <article class={`card card-interactive card-padding-none reveal d${i + 1}`} style="overflow: hidden; height: 100%; display: flex; flex-direction: column;">
+          <div class="relative" style="border-radius: 0;">
+            <PhotoFrame
+              src={p.foto}
+              alt={p.nombre}
+              placeholder={`Foto: ${p.nombre}`}
+              flat={true}
+              aspect="5/3"
+              class="!rounded-none !border-none"
+            />
+            <div style="position: absolute; top: 14px; left: 14px; z-index: 2;">
+              <span class="badge badge-accent">{p.tamano}</span>
+            </div>
+            {i === 0 && (
+              <div style="position: absolute; top: 14px; right: 14px; z-index: 2;">
+                <span class="badge badge-pearl">Más pedido</span>
+              </div>
+            )}
+          </div>
+
+          <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: 14px; flex: 1;">
+            <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 12px;">
+              <h3 style="margin: 0; font-family: var(--font-display); text-transform: uppercase; font-size: 22px; line-height: 1;">{p.nombre}</h3>
+              <span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; color: var(--color-text-muted); flex: none;">
+                <Icon name="snowflake" size={14} /> Congelado
+              </span>
+            </div>
+            <p style="margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.55;">{p.descripcion}</p>
+
+            <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 14px;">
+              <div>
+                <div class="overline" style="margin-bottom: 8px;">Congelado · Mayorista</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  {p.congelado.map((pres) => (
+                    <span class="badge badge-outline" style="letter-spacing: 0.06em;">{pres}</span>
+                  ))}
+                </div>
+              </div>
+              <div>
+                <div class="overline" style="margin-bottom: 8px;">Cocido · Eventos</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  {p.cocido.map((pres) => (
+                    <span class="badge badge-outline" style="letter-spacing: 0.06em;">{pres}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <p class="reveal" style="margin: var(--space-6) auto 0; text-align: center; color: var(--color-text-muted); font-size: 14px; max-width: 540px;">
+      {productos_intro.notaPrecio}
+    </p>
+  </div>
+</section>

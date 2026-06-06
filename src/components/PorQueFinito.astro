@@ -1,0 +1,45 @@
+---
+import { porQueFinito } from '@/data/content';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+---
+
+<section id="por-que-finito" class="section">
+  <div class="container-finito">
+    <div class="grid lg:grid-cols-2 lg:items-center" style="gap: var(--space-7);">
+      <div class="reveal">
+        <Eyebrow>{porQueFinito.eyebrow}</Eyebrow>
+        <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px; max-width: 14ch;">
+          La receta es de la abuela. <span class="text-shimmer">Literal.</span>
+        </h2>
+        <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 480px;">
+          {porQueFinito.texto}
+        </p>
+        <ul style="list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 14px;">
+          {porQueFinito.puntos.map((punto) => (
+            <li style="display: flex; gap: 12px; align-items: center; color: var(--color-text-primary); font-weight: 500;">
+              <span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+                <Icon name="check" size={15} />
+              </span>
+              {punto}
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="reveal d2 relative">
+        <PhotoFrame
+          src="/fotos/queso-estira.jpg"
+          alt="Tequeño abierto al medio, queso estirándose entre las dos partes"
+          placeholder="Foto: tequeño abierto · queso que estira"
+          aspect="4/5"
+        />
+        <div class="hidden sm:block absolute card" style="bottom: -16px; right: -16px; padding: 14px 18px; border-color: rgba(251,176,59,0.3);">
+          <div class="overline" style="font-size: 10px; letter-spacing: 0.18em; margin-bottom: 4px;">Cocción</div>
+          <div style="font-family: var(--font-display); font-size: 22px; color: var(--color-accent); line-height: 1;">4 min</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

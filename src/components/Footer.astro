@@ -1,0 +1,118 @@
+---
+import logoHorizontal from '@/assets/brand/logo-horizontal.svg';
+import { Image } from 'astro:assets';
+import { publicEnv } from '@/lib/env';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { footer } from '@/data/content';
+import Icon from '@/components/Icon.astro';
+---
+
+<footer style="border-top: 1px solid var(--border-subtle); background: var(--color-eerie-950); padding-block: var(--space-8);">
+  <div class="container-finito">
+    <div class="grid md:grid-cols-[1.4fr_1fr_1fr_1fr]" style="gap: var(--space-6);">
+      <div>
+        <Image
+          src={logoHorizontal}
+          alt="Finito Argentina"
+          width={180}
+          height={42}
+          class="h-[38px] w-auto mb-[18px]"
+        />
+        <p style="color: var(--color-text-muted); font-size: 14px; max-width: 280px; margin: 0;">
+          Tequeños artesanales venezolanos. Por mayor para tu local y por caja para tu evento.
+        </p>
+        <div style="display: flex; gap: 10px; margin-top: 20px;">
+          <a
+            href={publicEnv.PUBLIC_INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
+            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center; transition: color var(--dur-fast), border-color var(--dur-fast);"
+            data-analytics="footer-instagram"
+          >
+            <Icon name="instagram" size={18} />
+          </a>
+          <a
+            href={whatsappLinks.general}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="WhatsApp"
+            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center; transition: color var(--dur-fast), border-color var(--dur-fast);"
+            data-analytics="footer-whatsapp"
+          >
+            <Icon name="whatsapp" size={18} />
+          </a>
+          <span
+            aria-label="Zona de cobertura"
+            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center;"
+          >
+            <Icon name="map-pin" size={18} />
+          </span>
+        </div>
+      </div>
+
+      <div>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Empresa</div>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px;">
+          <li><a class="footer-link" href="#consignacion">Sin riesgo</a></li>
+          <li><a class="footer-link" href="#productos">Productos</a></li>
+          <li><a class="footer-link" href="#eventos">Eventos</a></li>
+          <li><a class="footer-link" href="#sobre">Sobre Finito</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Contacto</div>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px;">
+          <li>
+            <a
+              class="footer-link"
+              href={whatsappLinks.general}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              +{publicEnv.PUBLIC_WHATSAPP_NUMBER}
+            </a>
+          </li>
+          <li>
+            <a
+              class="footer-link"
+              href={publicEnv.PUBLIC_INSTAGRAM_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @finitoargentina
+            </a>
+          </li>
+          <li><a class="footer-link" href="#formulario">Pedí cotización</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Zona</div>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; color: var(--color-text-muted); font-size: 14px;">
+          <li>CABA</li>
+          <li>Zona Norte (GBA)</li>
+          <li style="color: var(--color-text-muted); font-size: 12px;">Para otras zonas, consultanos.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-text-muted); font-size: 13px;">
+      <span>{footer.copyright}</span>
+      <span>Hecho en Argentina · con queso que estira de verdad</span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-link {
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--ease-out);
+  }
+  .footer-link:hover {
+    color: var(--color-text-primary);
+  }
+</style>

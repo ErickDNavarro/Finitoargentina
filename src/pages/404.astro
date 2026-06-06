@@ -1,0 +1,33 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import Icon from '@/components/Icon.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+---
+
+<Base
+  title="Página no encontrada · Finito Argentina"
+  description="No encontramos lo que buscabas. Volvé al inicio o escribinos por WhatsApp."
+>
+  <Header />
+  <main class="section text-center" style="padding-top: 180px; padding-bottom: var(--space-10);">
+    <div class="container-finito">
+      <div class="overline" style="margin-bottom: 18px; display: inline-block;">Error 404</div>
+      <h1 style="font-size: var(--fs-display); line-height: 1; margin: 0 auto var(--space-5); max-width: 18ch;">
+        Esta página <span class="text-shimmer">se escapó</span> del freidor
+      </h1>
+      <p style="font-size: var(--fs-body-lg); color: var(--color-text-secondary); max-width: 540px; margin: 0 auto var(--space-6);">
+        No encontramos lo que buscabas, pero seguro podemos ayudarte. Volvé al inicio o escribinos directo.
+      </p>
+      <div class="flex flex-wrap" style="gap: var(--space-3); justify-content: center;">
+        <a href="/" class="btn btn-primary btn-lg">Volver al inicio<Icon name="arrow-right" size={18} /></a>
+        <a href={whatsappLinks.general} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener noreferrer">
+          <Icon name="whatsapp" size={20} />
+          Hablar por WhatsApp
+        </a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</Base>
