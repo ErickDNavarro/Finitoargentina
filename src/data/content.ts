@@ -29,7 +29,7 @@ export const consignacion = {
       n: '2',
       titulo: 'Lo freís y lo vendés',
       descripcion:
-        'Sale en 4 minutos. Lo cobrás con tu margen. Ves cómo se mueve con tu gente real, sin presión.',
+        'Sale en 4 minutos. Lo cobrás con tu margen. Ves cómo rota con tu público real.',
     },
     {
       n: '3',
