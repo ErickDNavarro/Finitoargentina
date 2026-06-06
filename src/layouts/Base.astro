@@ -1,42 +1,171 @@
 ---
 import '@/styles/global.css';
 import { publicEnv } from '@/lib/env';
+import {
+  businessInfo,
+  keywords,
+  areasMayorista,
+  social,
+  seoMeta,
+} from '@/data/seo';
+import { productos } from '@/data/productos';
 
 export interface Props {
   title?: string;
   description?: string;
   ogImage?: string;
   canonical?: string;
+  noindex?: boolean;
 }
 
 const {
-  title = 'Finito Argentina · Tequeños venezolanos mayoristas para tu carta',
-  description = 'Tequeños venezolanos auténticos para restaurantes, bares y eventos en CABA y Zona Norte. Primer pedido a consignación, sin riesgo. Consultá por WhatsApp.',
-  ogImage = '/og-image.svg',
+  title,
+  description = seoMeta.defaultDescription,
+  ogImage = seoMeta.ogImage,
   canonical,
+  noindex = false,
 } = Astro.props;
+
+const fullTitle = title
+  ? seoMeta.titleTemplate.replace('%s', title)
+  : seoMeta.defaultTitle;
 
 const siteUrl = publicEnv.PUBLIC_SITE_URL;
 const canonicalURL = canonical ?? new URL(Astro.url.pathname, siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteUrl).toString();
+const logoUrl = new URL('/favicon.svg', siteUrl).toString();
 
-const jsonLd = {
+// Areas served — formateadas para schema.org
+const areasCABA = areasMayorista.CABA.map((name) => ({
+  '@type': 'City',
+  name,
+  containedInPlace: {
+    '@type': 'City',
+    name: 'Ciudad Autónoma de Buenos Aires',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'AR',
+    },
+  },
+}));
+const areasGBA = areasMayorista.zonaNorte.map((name) => ({
+  '@type': 'City',
+  name,
+  containedInPlace: {
+    '@type': 'AdministrativeArea',
+    name: 'Zona Norte GBA',
+    address: {
+      '@type': 'PostalAddress',
+      addressRegion: 'Buenos Aires',
+      addressCountry: 'AR',
+    },
+  },
+}));
+
+// === JSON-LD: LocalBusiness + FoodEstablishment ===
+const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Finito Argentina',
-  description,
+  '@type': ['LocalBusiness', 'FoodEstablishment'],
+  '@id': `${siteUrl}/#business`,
+  name: businessInfo.name,
+  alternateName: businessInfo.alternateName,
+  description: businessInfo.description,
   url: siteUrl,
   image: ogImageUrl,
-  telephone: `+${publicEnv.PUBLIC_WHATSAPP_NUMBER}`,
-  priceRange: '$$',
+  logo: logoUrl,
+  telephone: businessInfo.telephone,
+  email: businessInfo.email,
+  priceRange: businessInfo.priceRange,
+  currenciesAccepted: businessInfo.currenciesAccepted,
+  paymentAccepted: businessInfo.paymentAccepted,
+  servesCuisine: businessInfo.servesCuisine,
   address: {
     '@type': 'PostalAddress',
-    addressLocality: 'Buenos Aires',
-    addressRegion: 'CABA y Zona Norte',
-    addressCountry: 'AR',
+    addressLocality: businessInfo.address.locality,
+    addressRegion: businessInfo.address.region,
+    addressCountry: businessInfo.address.country,
   },
-  areaServed: ['Buenos Aires', 'CABA', 'Zona Norte GBA'],
-  sameAs: [publicEnv.PUBLIC_INSTAGRAM_URL],
+  openingHoursSpecification: {
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: businessInfo.hours.days,
+    opens: businessInfo.hours.opens,
+    closes: businessInfo.hours.closes,
+  },
+  areaServed: [...areasCABA, ...areasGBA],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Tequeños venezolanos al por mayor',
+    itemListElement: productos.map((p, i) => ({
+      '@type': 'Offer',
+      position: i + 1,
+      availability: 'https://schema.org/InStock',
+      itemOffered: {
+        '@type': 'Product',
+        '@id': `${siteUrl}/#product-${p.id}`,
+        name: p.nombre,
+        description: p.descripcion,
+        category: 'Tequeños venezolanos',
+        brand: { '@type': 'Brand', name: businessInfo.name },
+        ...(p.foto && { image: new URL(p.foto, siteUrl).toString() }),
+      },
+    })),
+  },
+  makesOffer: [
+    {
+      '@type': 'Offer',
+      name: 'Tequeños al por mayor (consignación)',
+      description:
+        'Primer pedido a consignación para restaurantes, bares y locales. Pagás solo lo que se vendió.',
+      category: 'Mayorista B2B',
+    },
+    {
+      '@type': 'Offer',
+      name: 'Catering de tequeños para eventos',
+      description:
+        'Tequeños cocidos recién hechos para cumpleaños, casamientos, eventos corporativos.',
+      category: 'Catering',
+    },
+  ],
+  sameAs: [social.instagram],
+  knowsLanguage: ['es', 'es-AR'],
+};
+
+// === JSON-LD: Organization ===
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  '@id': `${siteUrl}/#organization`,
+  name: businessInfo.name,
+  alternateName: businessInfo.alternateName,
+  url: siteUrl,
+  logo: {
+    '@type': 'ImageObject',
+    url: logoUrl,
+    contentUrl: logoUrl,
+  },
+  description: businessInfo.description,
+  foundingDate: businessInfo.foundingDate,
+  sameAs: [social.instagram],
+  contactPoint: {
+    '@type': 'ContactPoint',
+    telephone: businessInfo.telephone,
+    email: businessInfo.email,
+    contactType: 'sales',
+    areaServed: 'AR',
+    availableLanguage: ['es', 'es-AR'],
+  },
+};
+
+// === JSON-LD: WebSite ===
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  '@id': `${siteUrl}/#website`,
+  url: siteUrl,
+  name: businessInfo.name,
+  description: businessInfo.description,
+  inLanguage: 'es-AR',
+  publisher: { '@id': `${siteUrl}/#organization` },
 };
 ---
 
@@ -47,37 +176,69 @@ const jsonLd = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1A1A1A" />
     <meta name="color-scheme" content="dark" />
+
+    {/* Performance: preconnect a Google Fonts */}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    {/* Favicon + PWA */}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content={businessInfo.shortName} />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
     <link rel="canonical" href={canonicalURL} />
 
-    <title>{title}</title>
+    {/* Title + description */}
+    <title>{fullTitle}</title>
     <meta name="description" content={description} />
-    <meta name="keywords" content="tequeños mayorista, proveedor tequeños Buenos Aires, tequeños venezolanos por mayor, tequeños CABA, catering tequeños, revendedor tequeños" />
-    <meta name="author" content="Finito Argentina" />
-    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <meta name="author" content={businessInfo.name} />
+    {noindex ? (
+      <meta name="robots" content="noindex, follow" />
+    ) : (
+      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    )}
 
-    <!-- Open Graph -->
+    {/* Geo (señal para Google Maps + local search) */}
+    <meta name="geo.region" content="AR-B" />
+    <meta name="geo.placename" content={`${businessInfo.address.locality}, ${businessInfo.address.region}`} />
+
+    {/* Open Graph */}
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_AR" />
-    <meta property="og:site_name" content="Finito Argentina" />
-    <meta property="og:title" content={title} />
+    <meta property="og:site_name" content={businessInfo.name} />
+    <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:secure_url" content={ogImageUrl} />
+    <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={seoMeta.ogImageAlt} />
 
-    <!-- Twitter Card -->
+    {/* Twitter Card */}
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={fullTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={seoMeta.ogImageAlt} />
 
-    <!-- JSON-LD LocalBusiness -->
-    <script is:inline type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    {/* JSON-LD structured data */}
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
 
-    <!-- Sitemap -->
+    {/* Sitemap */}
     <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {/* Google Search Console — pegá tu token en src/data/seo.ts → googleSiteVerification */}
+    {seoMeta.googleSiteVerification && (
+      <meta name="google-site-verification" content={seoMeta.googleSiteVerification} />
+    )}
   </head>
   <body class="min-h-screen bg-background text-text-primary">
     <a

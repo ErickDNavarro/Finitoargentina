@@ -4,6 +4,7 @@ import { Image } from 'astro:assets';
 import { publicEnv } from '@/lib/env';
 import { whatsappLinks } from '@/lib/whatsapp';
 import { footer } from '@/data/content';
+import { businessInfo, areasMayorista, areasRetail } from '@/data/seo';
 import Icon from '@/components/Icon.astro';
 ---
 
@@ -19,15 +20,15 @@ import Icon from '@/components/Icon.astro';
           class="h-[38px] w-auto mb-[18px]"
         />
         <p style="color: var(--color-text-muted); font-size: 14px; max-width: 280px; margin: 0;">
-          Tequeños artesanales venezolanos. Por mayor para tu local y por caja para tu evento.
+          Tequeños venezolanos al por mayor. Para tu local o tu evento, en CABA y Zona Norte.
         </p>
         <div style="display: flex; gap: 10px; margin-top: 20px;">
           <a
             href={publicEnv.PUBLIC_INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Instagram"
-            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center; transition: color var(--dur-fast), border-color var(--dur-fast);"
+            aria-label="Instagram de Finito Argentina"
+            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center;"
             data-analytics="footer-instagram"
           >
             <Icon name="instagram" size={18} />
@@ -36,18 +37,12 @@ import Icon from '@/components/Icon.astro';
             href={whatsappLinks.general}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="WhatsApp"
-            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center; transition: color var(--dur-fast), border-color var(--dur-fast);"
+            aria-label="WhatsApp de Finito Argentina"
+            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center;"
             data-analytics="footer-whatsapp"
           >
             <Icon name="whatsapp" size={18} />
           </a>
-          <span
-            aria-label="Zona de cobertura"
-            style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid var(--border-subtle); color: var(--color-text-secondary); display: inline-flex; align-items: center; justify-content: center;"
-          >
-            <Icon name="map-pin" size={18} />
-          </span>
         </div>
       </div>
 
@@ -85,22 +80,31 @@ import Icon from '@/components/Icon.astro';
             </a>
           </li>
           <li><a class="footer-link" href="#formulario">Pedí cotización</a></li>
+          <li style="color: var(--color-text-muted); font-size: 13px; padding-top: 8px; border-top: 1px solid var(--border-subtle); margin-top: 4px;">
+            {businessInfo.hours.daysHuman}<br/>
+            {businessInfo.hours.openHuman}
+          </li>
         </ul>
       </div>
 
       <div>
-        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Zona</div>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px; color: var(--color-text-muted); font-size: 14px;">
-          <li>CABA</li>
-          <li>Zona Norte (GBA)</li>
-          <li style="color: var(--color-text-muted); font-size: 12px;">Para otras zonas, consultanos.</li>
-        </ul>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Mayorista</div>
+        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0 0 6px; line-height: 1.5;">
+          <strong style="color: var(--color-text-secondary);">CABA</strong>: {areasMayorista.CABA.join(', ')}.
+        </p>
+        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0 0 12px; line-height: 1.5;">
+          <strong style="color: var(--color-text-secondary);">Zona Norte</strong>: {areasMayorista.zonaNorte.join(', ')}.
+        </p>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; margin-top: 16px; margin-bottom: 6px; color: var(--color-text-primary);">Retail · Particulares</div>
+        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0; line-height: 1.5;">
+          Entrega directa en {areasRetail.join(', ')}.
+        </p>
       </div>
     </div>
 
     <div style="margin-top: var(--space-7); padding-top: var(--space-5); border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; color: var(--color-text-muted); font-size: 13px;">
       <span>{footer.copyright}</span>
-      <span>Hecho en Argentina · con queso que estira de verdad</span>
+      <span>Hecho en Pilar, Buenos Aires · con queso que estira de verdad</span>
     </div>
   </div>
 </footer>
