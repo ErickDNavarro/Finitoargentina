@@ -2,8 +2,8 @@ import type { APIRoute } from 'astro';
 import { leadSchema, type FieldErrors } from '@/lib/lead-schema';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { checkRateLimit } from '@/lib/ratelimit';
-import { sendLeadEmail } from '@/lib/resend';
-import { getServerEnv } from '@/lib/env';
+import { sendLeadEmail, sendLeadConfirmation } from '@/lib/resend';
+import { getServerEnv, publicEnv } from '@/lib/env';
 
 export const prerender = false;
 
@@ -106,16 +106,39 @@ export const POST: APIRoute = async ({ request, clientAddress }) => {
     });
   }
 
-  const sent = await sendLeadEmail({
-    lead,
-    apiKey: env.RESEND_API_KEY,
-    from: env.LEAD_FROM_EMAIL,
-    to: env.LEAD_TO_EMAIL,
-  });
+  // Notificación al dueño (la crítica) + auto-confirmación al lead (best effort) en paralelo
+  const [sent, confirmation] = await Promise.allSettled([
+    sendLeadEmail({
+      lead,
+      apiKey: env.RESEND_API_KEY,
+      from: env.LEAD_FROM_EMAIL,
+      to: env.LEAD_TO_EMAIL,
+    }),
+    sendLeadConfirmation({
+      lead,
+      apiKey: env.RESEND_API_KEY,
+      from: env.LEAD_FROM_EMAIL,
+      replyTo: env.LEAD_TO_EMAIL,
+      whatsappNumber: publicEnv.PUBLIC_WHATSAPP_NUMBER,
+      instagramUrl: publicEnv.PUBLIC_INSTAGRAM_URL,
+    }),
+  ]);
 
-  if (!sent.ok) {
-    console.error('[lead] Resend error:', sent.error);
+  // La notificación al dueño DEBE haber funcionado (es lo crítico)
+  if (sent.status === 'rejected') {
+    console.error('[lead] Resend notification rejected:', String(sent.reason));
     return jsonError(500, 'INTERNAL_ERROR', 'No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+  }
+  if (!sent.value.ok) {
+    console.error('[lead] Resend notification error:', sent.value.error);
+    return jsonError(500, 'INTERNAL_ERROR', 'No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+  }
+
+  // La confirmación al lead es best effort — logueamos si falla pero no rompemos el flow
+  if (confirmation.status === 'rejected') {
+    console.warn('[lead] Confirmation rejected:', String(confirmation.reason));
+  } else if (!confirmation.value.ok && !('skipped' in confirmation.value && confirmation.value.skipped)) {
+    console.warn('[lead] Confirmation failed (non-blocking):', confirmation.value.error);
   }
 
   return new Response(JSON.stringify({ ok: true }), {
