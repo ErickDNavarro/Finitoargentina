@@ -29,7 +29,7 @@ const ejemplos: Record<string, string> = {
       <p style="text-align: center;">Tres formatos, tres tipos de negocio. Si te encontrás en alguno, te conviene probar.</p>
     </div>
 
-    <div class="grid md:grid-cols-3" style="gap: var(--space-5); margin-top: var(--space-7);">
+    <div class="grid grid-cols-1 md:grid-cols-3 min-w-0" style="gap: var(--space-5); margin-top: var(--space-7);">
       {paraQuien.segmentos.map((s, i) => {
         const featured = i === 1;
         return (

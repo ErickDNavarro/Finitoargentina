@@ -14,7 +14,7 @@ const hasTestimonios = socialProof.testimonios.length > 0;
         <h2 style="text-align: center;">{socialProof.titulo}</h2>
       </div>
 
-      <div class="grid md:grid-cols-3" style="gap: var(--space-5); margin-top: var(--space-7);">
+      <div class="grid grid-cols-1 md:grid-cols-3 min-w-0" style="gap: var(--space-5); margin-top: var(--space-7);">
         {socialProof.testimonios.map((t, i) => (
           <div class={`card reveal d${i + 1}`} style="display: flex; flex-direction: column; gap: 18px;">
             <div style="display: flex; gap: 3px; color: var(--color-accent);">

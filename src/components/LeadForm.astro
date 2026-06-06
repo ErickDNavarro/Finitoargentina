@@ -15,7 +15,7 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
     <div class="form-shell" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden;">
       <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
 
-      <div class="grid lg:grid-cols-2 relative z-[1]" style="gap: var(--space-7);">
+      <div class="grid grid-cols-1 lg:grid-cols-2 relative z-[1] min-w-0" style="gap: var(--space-7);">
         <div class="reveal">
           <Eyebrow>{formulario.eyebrow}</Eyebrow>
           <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">Mandanos tus datos. <span class="text-shimmer">Te escribimos hoy</span></h2>
@@ -50,15 +50,15 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
             class="form-card"
             style="background: var(--color-surface-card); border: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); box-shadow: var(--edge-light);"
           >
-            <div class="grid sm:grid-cols-2" style="gap: var(--space-4);">
-              <div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 min-w-0" style="gap: var(--space-4);">
+              <div class="min-w-0">
                 <label class="form-label" for="lead-nombre">Tu nombre <span class="req">*</span></label>
                 <div class="input-wrap">
                   <input id="lead-nombre" name="nombre" type="text" class="input-field" required autocomplete="name" placeholder="Damián López" maxlength="80" />
                 </div>
                 <p class="form-error" data-error="nombre" hidden></p>
               </div>
-              <div>
+              <div class="min-w-0">
                 <label class="form-label" for="lead-negocio">Tu negocio <span class="req">*</span></label>
                 <div class="input-wrap">
                   <input id="lead-negocio" name="negocio" type="text" class="input-field" required placeholder="Bar El Palacio" maxlength="100" />
@@ -67,8 +67,8 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
               </div>
             </div>
 
-            <div class="grid sm:grid-cols-2" style="gap: var(--space-4);">
-              <div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 min-w-0" style="gap: var(--space-4);">
+              <div class="min-w-0">
                 <label class="form-label" for="lead-tipo">Tipo <span class="req">*</span></label>
                 <div class="input-wrap">
                   <select id="lead-tipo" name="tipo" class="input-field" required>
@@ -80,7 +80,7 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
                 </div>
                 <p class="form-error" data-error="tipo" hidden></p>
               </div>
-              <div>
+              <div class="min-w-0">
                 <label class="form-label" for="lead-zona">Zona <span class="req">*</span></label>
                 <div class="input-wrap">
                   <input id="lead-zona" name="zona" type="text" class="input-field" required placeholder="Núñez, CABA" maxlength="80" />

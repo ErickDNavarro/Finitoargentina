@@ -14,7 +14,7 @@ import PhotoFrame from '@/components/PhotoFrame.astro';
       <p>{productos_intro.subtitulo}</p>
     </div>
 
-    <div class="grid md:grid-cols-2" style="gap: var(--space-6); margin-top: var(--space-7);">
+    <div class="grid grid-cols-1 md:grid-cols-2 min-w-0" style="gap: var(--space-6); margin-top: var(--space-7);">
       {productos.map((p, i) => (
         <article class={`card card-interactive card-padding-none reveal d${i + 1}`} style="overflow: hidden; height: 100%; display: flex; flex-direction: column;">
           <div class="relative" style="border-radius: 0;">

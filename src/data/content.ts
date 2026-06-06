@@ -50,7 +50,7 @@ export const porQueFinito = {
     'Masa fina que cruje, no gomosa',
     'Queso que estira de verdad',
     'Receta familiar, no industrial',
-    'Tamaño parejo, fritura sin grasa',
+    'Tamaño estándar, fritura sin grasa',
   ],
 } as const;
 

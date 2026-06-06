@@ -41,7 +41,7 @@ const comparativa = [
     </div>
 
     {/* Pasos */}
-    <ol class="grid md:grid-cols-3 list-none p-0" style="gap: var(--space-5); margin: var(--space-8) 0 0;">
+    <ol class="grid grid-cols-1 md:grid-cols-3 list-none p-0 min-w-0" style="gap: var(--space-5); margin: var(--space-8) 0 0;">
       {consignacion.pasos.map((paso, i) => (
         <li class={`reveal d${i + 1}`}>
           <div class="card h-full">
@@ -62,7 +62,7 @@ const comparativa = [
       <h3 style="text-align: center; font-family: var(--font-display); text-transform: uppercase; font-size: 22px; margin: 0 0 var(--space-6); color: var(--color-text-primary);">
         Lo que cambia <span style="color: var(--color-accent);">en la práctica</span>
       </h3>
-      <div class="grid md:grid-cols-2" style="gap: var(--space-4);">
+      <div class="grid grid-cols-1 md:grid-cols-2 min-w-0" style="gap: var(--space-4);">
         {comparativa.map((col) => (
           <div
             class="card"

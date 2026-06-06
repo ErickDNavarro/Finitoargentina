@@ -218,6 +218,19 @@
     border-block: 1px solid var(--border-subtle);
   }
 
+  /* === Panel XL — para los grandes contenedores con gradiente (Catering, Form) === */
+  .panel-xl {
+    border-radius: var(--radius-md);
+    padding: 18px;
+    max-width: 100%;
+  }
+  @media (min-width: 640px) {
+    .panel-xl { border-radius: var(--radius-xl); padding: 32px; }
+  }
+  @media (min-width: 1024px) {
+    .panel-xl { padding: clamp(32px, 4vw, 56px); }
+  }
+
   /* === Overline (eyebrow + the brand "ARGENTINA" lockup) === */
   .overline {
     font-family: var(--font-body);
