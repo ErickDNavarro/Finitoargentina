@@ -57,31 +57,30 @@ import PhotoFrame from '@/components/PhotoFrame.astro';
   .tequeno-watermark {
     position: absolute;
     top: 50%;
-    left: -120px;
-    width: 540px;
+    left: -80px;
+    width: 480px;
     height: auto;
     transform: translateY(-50%) rotate(-12deg);
-    opacity: 0.10;
-    filter: blur(14px) saturate(1.2);
+    opacity: 0.28;
+    filter: blur(10px) saturate(1.3) brightness(1.1);
     pointer-events: none;
     z-index: 0;
-    mix-blend-mode: screen;
     object-fit: contain;
-    max-width: 70%;
+    max-width: 90%;
   }
   @media (min-width: 768px) {
     .tequeno-watermark {
-      left: -80px;
-      width: 680px;
+      left: -40px;
+      width: 620px;
       max-width: 55%;
-      opacity: 0.13;
+      opacity: 0.32;
     }
   }
   @media (min-width: 1024px) {
     .tequeno-watermark {
-      left: -40px;
+      left: 20px;
       width: 720px;
-      opacity: 0.15;
+      opacity: 0.35;
     }
   }
   @media (prefers-reduced-motion: reduce) {
