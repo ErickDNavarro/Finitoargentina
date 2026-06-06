@@ -5,10 +5,19 @@ import Icon from '@/components/Icon.astro';
 import PhotoFrame from '@/components/PhotoFrame.astro';
 ---
 
-<section id="por-que-finito" class="section">
-  <div class="container-finito">
+<section id="por-que-finito" class="section relative overflow-hidden">
+  {/* Watermark difuminado del tequeño */}
+  <img
+    src="/fotos/hero.jpg"
+    alt=""
+    aria-hidden="true"
+    class="tequeno-watermark"
+    loading="lazy"
+  />
+
+  <div class="container-finito relative z-[1]">
     <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center min-w-0" style="gap: var(--space-7);">
-      <div class="reveal">
+      <div class="reveal min-w-0">
         <Eyebrow>{porQueFinito.eyebrow}</Eyebrow>
         <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px; max-width: 14ch;">
           La receta es de la abuela. <span class="text-shimmer">Literal.</span>
@@ -28,7 +37,7 @@ import PhotoFrame from '@/components/PhotoFrame.astro';
         </ul>
       </div>
 
-      <div class="reveal d2 relative">
+      <div class="reveal d2 relative min-w-0">
         <PhotoFrame
           src="/fotos/queso-estira.jpg"
           alt="Tequeño abierto al medio, queso estirándose entre las dos partes"
@@ -43,3 +52,39 @@ import PhotoFrame from '@/components/PhotoFrame.astro';
     </div>
   </div>
 </section>
+
+<style>
+  .tequeno-watermark {
+    position: absolute;
+    top: 50%;
+    left: -120px;
+    width: 540px;
+    height: auto;
+    transform: translateY(-50%) rotate(-12deg);
+    opacity: 0.10;
+    filter: blur(14px) saturate(1.2);
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: screen;
+    object-fit: contain;
+    max-width: 70%;
+  }
+  @media (min-width: 768px) {
+    .tequeno-watermark {
+      left: -80px;
+      width: 680px;
+      max-width: 55%;
+      opacity: 0.13;
+    }
+  }
+  @media (min-width: 1024px) {
+    .tequeno-watermark {
+      left: -40px;
+      width: 720px;
+      opacity: 0.15;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tequeno-watermark { transform: translateY(-50%) rotate(0); }
+  }
+</style>
