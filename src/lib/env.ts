@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
 const publicSchema = z.object({
-  PUBLIC_SITE_URL: z.string().url().default('https://finitoargentina.com.ar'),
+  PUBLIC_SITE_URL: z.string().url().default('https://finitoargentina.com'),
   PUBLIC_WHATSAPP_NUMBER: z.string().min(8).default('5491100000000'),
   PUBLIC_INSTAGRAM_URL: z.string().url().default('https://instagram.com/finitoargentina'),
   PUBLIC_TURNSTILE_SITE_KEY: z.string().default('1x00000000000000000000AA'),
@@ -9,8 +9,8 @@ const publicSchema = z.object({
 
 const serverSchema = z.object({
   RESEND_API_KEY: z.string().optional(),
-  LEAD_TO_EMAIL: z.string().email().default('hola@finitoargentina.com.ar'),
-  LEAD_FROM_EMAIL: z.string().email().default('web@finitoargentina.com.ar'),
+  LEAD_TO_EMAIL: z.string().email().default('hola@finitoargentina.com'),
+  LEAD_FROM_EMAIL: z.string().email().default('web@finitoargentina.com'),
   TURNSTILE_SECRET_KEY: z.string().optional(),
 });
 

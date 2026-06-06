@@ -4,7 +4,7 @@ import tailwindcss from '@tailwindcss/vite';
 import vercel from '@astrojs/vercel';
 import sitemap from '@astrojs/sitemap';
 
-const SITE = 'https://finitoargentina.com.ar';
+const SITE = 'https://finitoargentina.com';
 
 export default defineConfig({
   site: SITE,
