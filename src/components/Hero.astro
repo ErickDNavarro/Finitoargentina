@@ -20,6 +20,15 @@ const stats = [
   <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(251,176,59,0.20); top: -120px; right: -80px;"></div>
   <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.10); bottom: -120px; left: -120px;"></div>
 
+  {/* Tequeño watermark detrás del headline (izquierda) */}
+  <img
+    src="/fotos/hero.jpg"
+    alt=""
+    aria-hidden="true"
+    class="hero-watermark-bg"
+    loading="lazy"
+  />
+
   <div class="container-finito relative z-[1]">
     <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center gap-12 lg:gap-16 min-w-0">
       {/* Copy */}
@@ -68,12 +77,20 @@ const stats = [
 
       {/* Photo */}
       <div class="reveal is-visible d2 relative">
+        {/* Halo difuminado detrás de la foto */}
+        <img
+          src="/fotos/hero.jpg"
+          alt=""
+          aria-hidden="true"
+          class="hero-halo"
+          loading="lazy"
+        />
         <PhotoFrame
           src="/fotos/hero.jpg"
           alt="Tequeño recién frito con vapor sobre superficie oscura"
           placeholder="Foto: tequeños recién fritos"
           aspect="4/5"
-          class="lg:aspect-square"
+          class="lg:aspect-square relative z-[1]"
         />
         <div class="hidden sm:block absolute anim-bob" style="left: -22px; bottom: 60px; z-index: 2;">
           <span class="glass-chip">
