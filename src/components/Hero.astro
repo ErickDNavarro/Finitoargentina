@@ -126,35 +126,43 @@ const stats = [
 
   /* Watermark del tequeño detrás del headline (lateral izquierdo) */
   .hero-watermark-bg {
+    /* MOBILE — posicionado cerca del headline, más visible */
     position: absolute;
-    top: 50%;
-    left: -160px;
-    width: 540px;
+    top: 200px;
+    left: -90px;
+    width: 480px;
     height: auto;
-    transform: translateY(-50%) rotate(-18deg);
-    opacity: 0.18;
-    filter: blur(18px) saturate(1.4) brightness(1.1);
+    transform: rotate(-18deg);
+    opacity: 0.32;
+    filter: blur(10px) saturate(1.5) brightness(1.2);
     pointer-events: none;
     z-index: 0;
     object-fit: contain;
-    max-width: 80%;
+    max-width: 110%;
   }
   @media (min-width: 768px) {
     .hero-watermark-bg {
+      /* TABLET — vuelve al centro vertical, lateral izquierdo */
+      top: 50%;
       left: -120px;
       width: 680px;
       max-width: 50%;
-      opacity: 0.22;
+      opacity: 0.25;
+      transform: translateY(-50%) rotate(-18deg);
+      filter: blur(14px) saturate(1.4) brightness(1.15);
     }
   }
   @media (min-width: 1024px) {
     .hero-watermark-bg {
       left: -60px;
       width: 760px;
-      opacity: 0.25;
+      opacity: 0.28;
     }
   }
   @media (prefers-reduced-motion: reduce) {
-    .hero-watermark-bg { transform: translateY(-50%) rotate(0); }
+    .hero-watermark-bg { transform: rotate(0); }
+    @media (min-width: 768px) {
+      .hero-watermark-bg { transform: translateY(-50%) rotate(0); }
+    }
   }
 </style>
