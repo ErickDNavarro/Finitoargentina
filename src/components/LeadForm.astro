@@ -12,7 +12,7 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
   <div class="glow-blob" style="width: 460px; height: 460px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
 
   <div class="container-finito">
-    <div style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid var(--border-subtle); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden;">
+    <div class="form-shell" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden;">
       <div class="glow-blob" style="width: 360px; height: 360px; background: rgba(251,176,59,0.16); top: -120px; right: -60px;"></div>
 
       <div class="grid lg:grid-cols-2 relative z-[1]" style="gap: var(--space-7);">
@@ -47,7 +47,8 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
           <form
             id="lead-form"
             novalidate
-            style="background: var(--color-surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-lg); padding: var(--space-6); display: flex; flex-direction: column; gap: var(--space-4); box-shadow: var(--edge-light);"
+            class="form-card"
+            style="background: var(--color-surface-card); border: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: var(--space-4); box-shadow: var(--edge-light);"
           >
             <div class="grid sm:grid-cols-2" style="gap: var(--space-4);">
               <div>
@@ -124,7 +125,7 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
             <p class="form-error" style="text-align: center;" data-error="__global" role="alert" hidden></p>
           </form>
 
-          <div id="lead-success" class="hidden" style="background: var(--color-surface-card); border: 1px solid rgba(251, 176, 59, 0.35); border-radius: var(--radius-lg); padding: var(--space-7); text-align: center;" role="status" aria-live="polite">
+          <div id="lead-success" class="hidden form-card" style="background: var(--color-surface-card); border: 1px solid rgba(251, 176, 59, 0.35); text-align: center;" role="status" aria-live="polite">
             <span style="display: inline-flex; width: 64px; height: 64px; border-radius: 50%; background: var(--color-accent); color: var(--color-text-on-accent); align-items: center; justify-content: center; margin-bottom: 18px;">
               <Icon name="check" size={32} />
             </span>
@@ -137,6 +138,28 @@ const turnstileSiteKey = publicEnv.PUBLIC_TURNSTILE_SITE_KEY;
   </div>
 </section>
 
+<style>
+  /* Shell del form panel — padding aggresivo en mobile, generoso en desktop */
+  .form-shell {
+    border-radius: var(--radius-lg);
+    padding: 18px;
+  }
+  @media (min-width: 640px) {
+    .form-shell { border-radius: var(--radius-xl); padding: 32px; }
+  }
+  @media (min-width: 1024px) {
+    .form-shell { padding: clamp(32px, 4vw, 56px); }
+  }
+
+  /* Card interno del form — sin padding stacked extra en mobile */
+  .form-card {
+    border-radius: var(--radius-md);
+    padding: 18px;
+  }
+  @media (min-width: 640px) {
+    .form-card { border-radius: var(--radius-lg); padding: 28px; }
+  }
+</style>
 <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 
 <script>
