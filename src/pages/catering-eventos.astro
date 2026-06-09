@@ -1,0 +1,257 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { businessInfo } from '@/data/seo';
+
+const title = 'Catering de tequeños para eventos en Buenos Aires';
+const description =
+  'Catering de tequeños venezolanos recién hechos para cumpleaños, casamientos, eventos corporativos y after-office. Llegan calientes y crocantes a CABA y Zona Norte. Cotización en el día por WhatsApp.';
+
+const packs = [
+  {
+    rango: '30–60',
+    quien: 'Reunión chica',
+    detalle: 'Cumple íntimo, after-office, juntada con amigos.',
+    incluye: 'Tequeño pequeño (7,5 cm) — formato finger food.',
+  },
+  {
+    rango: '60–150',
+    quien: 'Cumpleaños / Casamiento',
+    detalle: 'Bandejas de servicio. Llegan calientes en horarios coordinados.',
+    incluye: 'Mix tequeño grande + pequeño según mesa o picada.',
+    featured: true,
+  },
+  {
+    rango: '150+',
+    quien: 'Evento corporativo',
+    detalle: 'Lanzamientos, fin de año, conferencias. Coordinamos delivery escalonado.',
+    incluye: 'Pricing especial + reposición durante el evento si hace falta.',
+  },
+];
+
+const tipos = [
+  { titulo: 'Cumpleaños', d: 'De 30 a 200 invitados. Llegan calientes en bandejas.' },
+  { titulo: 'Casamientos', d: 'Cocktail de bienvenida o estación de comida. Coordinamos con tu wedding planner.' },
+  { titulo: 'Eventos corporativos', d: 'Lanzamientos, fin de año, conferencias. Facturación A.' },
+  { titulo: 'After-office', d: 'Bandejas para 30-50 personas. Perfecto para terraza o sala.' },
+];
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="contenido">
+    {/* HERO */}
+    <section class="section relative isolate overflow-hidden" style="padding-top: 148px;">
+      <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(251,176,59,0.18); top: -120px; right: -80px;"></div>
+
+      <div class="container-finito relative z-[1]">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] lg:items-center gap-12 min-w-0">
+          <div>
+            <Eyebrow>Catering · CABA + Zona Norte</Eyebrow>
+            <h1 class="heading-display mt-5 text-balance" style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1;">
+              Catering de <span class="text-shimmer">tequeños</span> para tu evento.
+            </h1>
+            <p class="mt-6 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              Cumpleaños, casamientos, eventos corporativos, after-office.
+              Llegan <strong>cocidos, calientes, listos para servir</strong>.
+              No fritos hace una hora en la cocina del salón.
+            </p>
+            <p class="mt-4 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              <strong>Cotización en el día.</strong> Coordinamos delivery con horario exacto.
+            </p>
+            <div class="mt-8 flex flex-wrap" style="gap: var(--space-3);">
+              <a
+                href={whatsappLinks.catering}
+                class="btn btn-whatsapp btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-analytics="catering-page-cta-whatsapp"
+              >
+                <Icon name="whatsapp" size={20} />
+                Cotizar mi evento
+              </a>
+              <a
+                href={`mailto:${businessInfo.eventsEmail}?subject=Cotización%20catering%20evento`}
+                class="btn btn-secondary btn-lg"
+              >
+                Por mail
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <PhotoFrame
+              src="/fotos/producto-pequeno.jpg"
+              alt="Bandeja de tequeños venezolanos cocidos para evento"
+              placeholder="Foto: bandeja para evento"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* PACKS POR TAMAÑO */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Cómo lo armamos</Eyebrow></div>
+          <h2 style="text-align: center;">Coordinamos según tu evento</h2>
+          <p style="text-align: center; max-width: 640px;">
+            No tenemos packs cerrados. Te coordinamos cantidad y formato según invitados, horario y locación.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 min-w-0" style="gap: var(--space-5); margin-top: var(--space-7);">
+          {packs.map((p, i) => (
+            <div class={`reveal d${i + 1} card ${p.featured ? 'card-accent' : ''}`} style={`position: relative; padding: var(--space-6); ${p.featured ? 'background: linear-gradient(180deg, rgba(251,176,59,0.10), var(--color-surface-card));' : ''}`}>
+              {p.featured && (
+                <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%);">
+                  <span class="badge badge-accent">Más común</span>
+                </div>
+              )}
+              <div style="font-family: var(--font-display); font-size: 14px; color: var(--color-accent); letter-spacing: 0.1em; margin-bottom: 8px;">INVITADOS</div>
+              <div style="font-family: var(--font-display); font-size: 36px; color: var(--color-text-primary); line-height: 1;">{p.rango}</div>
+              <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 17px; margin-top: 16px; color: var(--color-text-primary);">{p.quien}</div>
+              <p style="font-size: 14px; color: var(--color-text-secondary); margin-top: 8px; line-height: 1.55;">{p.detalle}</p>
+              <p style="font-size: 13px; color: var(--color-text-muted); margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border-subtle); line-height: 1.5;"><strong style="color: var(--color-text-secondary);">Incluye:</strong> {p.incluye}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* TIPOS DE EVENTO */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center" style="gap: var(--space-7);">
+          <div class="reveal">
+            <Eyebrow>Para qué eventos</Eyebrow>
+            <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">
+              Catering para <span class="text-shimmer">cualquier formato</span>.
+            </h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px;">
+              Coordinamos delivery con el horario exacto para que lleguen calientes al momento que querés servirlos.
+              En eventos grandes, hacemos delivery escalonado.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 14px;">
+              {tipos.map((t) => (
+                <li style="display: flex; gap: 12px; padding: 14px; background: var(--color-surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+                  <span style="flex: none; width: 32px; height: 32px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+                    <Icon name="party-popper" size={18} />
+                  </span>
+                  <div>
+                    <div style="font-family: var(--font-display); font-size: 15px; color: var(--color-text-primary); text-transform: uppercase; letter-spacing: 0.04em;">{t.titulo}</div>
+                    <div style="font-size: 14px; color: var(--color-text-secondary); margin-top: 4px; line-height: 1.5;">{t.d}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reveal d2 relative">
+            <PhotoFrame
+              src="/fotos/producto-grande.jpg"
+              alt="Tequeños venezolanos para catering de evento"
+              placeholder="Foto: bandeja con tequeños"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Preguntas frecuentes</Eyebrow></div>
+          <h2 style="text-align: center;">Lo que más nos preguntan</h2>
+        </div>
+        <div style="max-width: 740px; margin: var(--space-7) auto 0; display: flex; flex-direction: column; gap: var(--space-3);">
+          {[
+            {
+              q: '¿Llegan calientes o tengo que freírlos yo?',
+              a: 'Llegan COCIDOS, calientes, listos para servir. Coordinamos el horario de entrega para que lleguen 15 minutos antes del momento de servicio. Si tu evento es muy largo, hacemos delivery escalonado.',
+            },
+            {
+              q: '¿Con cuánta anticipación tengo que reservar?',
+              a: 'Lo ideal: 48-72 hs antes del evento. Para eventos chicos (<60 personas) y si tenemos disponibilidad, podemos coordinar en 24 hs. Eventos grandes (200+) conviene avisar con 1 semana.',
+            },
+            {
+              q: '¿Cuánto cuesta el catering?',
+              a: 'Depende de cantidad de invitados, distancia desde Pilar, y si necesitás delivery escalonado. Cotización en el día por WhatsApp con tu fecha + invitados estimados + locación + horario.',
+            },
+            {
+              q: '¿A qué zonas entregan?',
+              a: 'CABA y todo Zona Norte GBA: Vicente López, San Isidro, Tigre, Pilar, Escobar y sus alrededores. Para zonas más alejadas (Zona Oeste / Sur) consultanos, evaluamos caso por caso.',
+            },
+            {
+              q: '¿Facturan A?',
+              a: 'Sí. Para eventos corporativos facturamos como necesites (A, B, o C). Mandanos los datos fiscales y lo coordinamos.',
+            },
+            {
+              q: '¿Cuántos tequeños por persona suelen pedir?',
+              a: 'Como entrada/picada: 3-4 unidades por persona. Como cocktail finger food: 5-7. Como principal compartido con otras cosas: 2-3. Te orientamos según tu evento en la cotización.',
+            },
+            {
+              q: '¿Llevan personal a servir?',
+              a: 'No. Entregamos las bandejas listas y vos las servís. Si necesitás personal de servicio, te recomendamos un par de proveedores con los que trabajamos.',
+            },
+          ].map((item) => (
+            <details class="card" style="cursor: pointer;">
+              <summary style="font-family: var(--font-display); font-size: 17px; color: var(--color-text-primary); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                <span>{item.q}</span>
+                <span style="color: var(--color-accent); font-size: 22px; font-weight: bold;">+</span>
+              </summary>
+              <p style="margin: 14px 0 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55;">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CTA FINAL */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="reveal" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid rgba(251,176,59,0.35); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); text-align: center; max-width: 900px; margin: 0 auto;">
+          <h2 style="font-size: var(--fs-h2); margin: 0 0 14px;">
+            ¿Tu evento es <span class="text-shimmer">pronto</span>?
+          </h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px; margin: 0 auto;">
+            Te cotizamos en el día. Mandanos por WhatsApp: fecha, invitados, locación y horario.
+          </p>
+          <div class="flex flex-wrap" style="gap: var(--space-3); justify-content: center; margin-top: var(--space-6);">
+            <a
+              href={whatsappLinks.catering}
+              class="btn btn-whatsapp btn-lg"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="whatsapp" size={20} />
+              Cotizar por WhatsApp
+            </a>
+            <a
+              href={`mailto:${businessInfo.eventsEmail}?subject=Cotización%20catering%20evento`}
+              class="btn btn-secondary btn-lg"
+            >
+              {businessInfo.eventsEmail}
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>

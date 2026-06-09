@@ -5,6 +5,7 @@ import { publicEnv } from '@/lib/env';
 import { whatsappLinks } from '@/lib/whatsapp';
 import { footer } from '@/data/content';
 import { businessInfo, areasMayorista, areasRetail } from '@/data/seo';
+import { zonas } from '@/data/zonas';
 import Icon from '@/components/Icon.astro';
 ---
 
@@ -47,12 +48,13 @@ import Icon from '@/components/Icon.astro';
       </div>
 
       <div>
-        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Empresa</div>
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Páginas</div>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 11px;">
-          <li><a class="footer-link" href="#consignacion">Sin riesgo</a></li>
-          <li><a class="footer-link" href="#productos">Productos</a></li>
-          <li><a class="footer-link" href="#eventos">Eventos</a></li>
-          <li><a class="footer-link" href="#sobre">Sobre Finito</a></li>
+          <li><a class="footer-link" href="/">Inicio</a></li>
+          <li><a class="footer-link" href="/consignacion">Consignación · Sin riesgo</a></li>
+          <li><a class="footer-link" href="/tequenos-congelados">Tequeños congelados</a></li>
+          <li><a class="footer-link" href="/catering-eventos">Catering eventos</a></li>
+          <li><a class="footer-link" href="/blog">Blog</a></li>
         </ul>
       </div>
 
@@ -96,15 +98,22 @@ import Icon from '@/components/Icon.astro';
       </div>
 
       <div>
-        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Mayorista</div>
-        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0 0 6px; line-height: 1.5;">
-          <strong style="color: var(--color-text-secondary);">CABA</strong>: {areasMayorista.CABA.join(', ')}.
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; letter-spacing: 0.05em; margin-bottom: 16px; color: var(--color-text-primary);">Zonas mayorista</div>
+        <ul style="list-style: none; padding: 0; margin: 0 0 12px; display: flex; flex-direction: column; gap: 8px;">
+          {zonas.map((z) => (
+            <li>
+              <a class="footer-link" href={`/tequenos-${z.slug}`}>Tequeños en {z.nombre}</a>
+            </li>
+          ))}
+        </ul>
+        <p style="color: var(--color-text-muted); font-size: 12px; margin: 12px 0 6px; line-height: 1.5; padding-top: 12px; border-top: 1px solid var(--border-subtle);">
+          <strong style="color: var(--color-text-secondary);">+CABA</strong>: {areasMayorista.CABA.join(', ')}.
         </p>
-        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0 0 12px; line-height: 1.5;">
-          <strong style="color: var(--color-text-secondary);">Zona Norte</strong>: {areasMayorista.zonaNorte.join(', ')}.
+        <p style="color: var(--color-text-muted); font-size: 12px; margin: 0 0 12px; line-height: 1.5;">
+          <strong style="color: var(--color-text-secondary);">+Zona Norte</strong>: {areasMayorista.zonaNorte.join(', ')}.
         </p>
-        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; margin-top: 16px; margin-bottom: 6px; color: var(--color-text-primary);">Retail · Particulares</div>
-        <p style="color: var(--color-text-muted); font-size: 13px; margin: 0; line-height: 1.5;">
+        <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 11px; letter-spacing: 0.08em; margin-top: 14px; margin-bottom: 6px; color: var(--color-text-primary);">Retail · Particulares</div>
+        <p style="color: var(--color-text-muted); font-size: 12px; margin: 0; line-height: 1.5;">
           Entrega directa en {areasRetail.join(', ')}.
         </p>
       </div>

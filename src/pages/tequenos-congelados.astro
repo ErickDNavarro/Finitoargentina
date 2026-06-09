@@ -1,0 +1,236 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { productos } from '@/data/productos';
+---
+
+<Base
+  title="Tequeños congelados al por mayor para tu local"
+  description="Tequeños venezolanos congelados al por mayor para restaurantes, bares y revendedores. 2 formatos (15 cm grande / 7,5 cm pequeño), entrega refrigerada en CABA y Zona Norte. Primer pedido a consignación."
+>
+  <Header />
+  <main id="contenido">
+    {/* HERO */}
+    <section class="section relative isolate overflow-hidden" style="padding-top: 148px;">
+      <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(173,216,230,0.15); top: -120px; right: -80px;"></div>
+
+      <div class="container-finito relative z-[1]">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] lg:items-center gap-12 min-w-0">
+          <div>
+            <Eyebrow>Mayorista · Congelado</Eyebrow>
+            <h1 class="heading-display mt-5 text-balance" style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1;">
+              Tequeños <span class="text-shimmer">congelados</span> al por mayor.
+            </h1>
+            <p class="mt-6 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              Te llegan congelados, listos para freír. Cadena de frío garantizada hasta tu freezer.
+              <strong>Del freezer a la mesa en 4 minutos.</strong>
+            </p>
+            <p class="mt-4 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              Primer pedido a consignación. Si no rota, lo retiramos.
+            </p>
+            <div class="mt-8 flex flex-wrap" style="gap: var(--space-3);">
+              <a href="/#formulario" class="btn btn-primary btn-lg">
+                Pedí tu cotización
+                <Icon name="arrow-right" size={18} />
+              </a>
+              <a
+                href={whatsappLinks.revendedor}
+                class="btn btn-whatsapp btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="whatsapp" size={20} />
+                WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <PhotoFrame
+              src="/fotos/hero.jpg"
+              alt="Tequeños venezolanos congelados para restaurante"
+              placeholder="Foto: tequeños congelados"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* 2 FORMATOS */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Dos formatos</Eyebrow></div>
+          <h2 style="text-align: center;">Elegí según tu carta</h2>
+          <p style="text-align: center; max-width: 640px;">
+            Grande para entrada compartida o plato individual. Pequeño para picada y finger food.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 min-w-0" style="gap: var(--space-6); margin-top: var(--space-7);">
+          {productos.map((p, i) => (
+            <article class={`card card-elevated card-padding-none reveal d${i + 1}`} style="overflow: hidden; display: flex; flex-direction: column;">
+              <div class="relative" style="border-radius: 0;">
+                <PhotoFrame
+                  src={p.foto}
+                  alt={p.nombre}
+                  placeholder={`Foto: ${p.nombre}`}
+                  flat={true}
+                  aspect="5/3"
+                  class="!rounded-none !border-none"
+                />
+                <div style="position: absolute; top: 14px; left: 14px; z-index: 2;">
+                  <span class="badge badge-accent">{p.tamano}</span>
+                </div>
+              </div>
+
+              <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: 14px; flex: 1;">
+                <h3 style="margin: 0; font-family: var(--font-display); text-transform: uppercase; font-size: 22px; line-height: 1;">{p.nombre}</h3>
+                <p style="margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.55;">{p.descripcion}</p>
+                <div style="margin-top: auto; padding-top: 14px; border-top: 1px solid var(--border-subtle);">
+                  <div class="overline" style="margin-bottom: 8px;">Presentaciones congelado · mayorista</div>
+                  <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                    {p.congelado.map((pres) => (
+                      <span class="badge badge-outline" style="letter-spacing: 0.06em;">{pres}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CADENA DE FRÍO + ENTREGA */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center" style="gap: var(--space-7);">
+          <div class="reveal">
+            <Eyebrow>Logística</Eyebrow>
+            <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">
+              Cadena de frío hasta tu <span class="text-shimmer">freezer</span>.
+            </h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px;">
+              Entregamos refrigerado en CABA y Zona Norte de Buenos Aires.
+              Los tequeños llegan a tu local en perfecto estado para ir directo al freezer hasta el momento de freír.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 14px;">
+              {[
+                'Entrega refrigerada hasta tu local',
+                'Coordinamos horario para no interrumpir tu cocina',
+                'Cadena de frío garantizada en tránsito',
+                'Reposición flexible — pedís cuando lo necesitás',
+                'Mismo día en Pilar / Del Viso / Manuel Alberti',
+                '24-48 hs en CABA y resto de Zona Norte',
+              ].map((punto) => (
+                <li style="display: flex; gap: 12px; align-items: center; color: var(--color-text-primary); font-weight: 500;">
+                  <span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+                    <Icon name="check" size={15} />
+                  </span>
+                  {punto}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reveal d2 relative">
+            <PhotoFrame
+              src="/fotos/producto-grande.jpg"
+              alt="Tequeños congelados en su packaging mayorista"
+              placeholder="Foto: packaging mayorista"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Preguntas frecuentes</Eyebrow></div>
+          <h2 style="text-align: center;">Lo que más nos preguntan los locales</h2>
+        </div>
+        <div style="max-width: 740px; margin: var(--space-7) auto 0; display: flex; flex-direction: column; gap: var(--space-3);">
+          {[
+            {
+              q: '¿Cuánto duran en el freezer?',
+              a: 'Hasta 6 meses en freezer (-18 °C) sin perder calidad. La mayoría de los locales los gastan en 2-4 semanas, así que no es un tema.',
+            },
+            {
+              q: '¿Cuánto tardan en freírse?',
+              a: '3-4 minutos desde el aceite caliente (170-180 °C). No requieren descongelar — del freezer directo al freidor. Por eso son entrada perfecta para cocinas con flujo alto.',
+            },
+            {
+              q: '¿Cuál es el pedido mínimo?',
+              a: 'Bajo. Coordinamos según tu local. Para arrancar a consignación, suelen ser entre 40 y 100 unidades — lo justo para que pruebes 1-2 semanas sin presión de stock.',
+            },
+            {
+              q: '¿Tienen factura A?',
+              a: 'Sí. Para tu local podemos facturar como necesites (A, B o C). Mandanos los datos de tu negocio y lo coordinamos en la primera orden.',
+            },
+            {
+              q: '¿Qué pasa si una vez los descongelan y no se freír todos?',
+              a: 'Una vez descongelados no recomendamos re-congelar. Por eso entregamos en cantidades manejables y, si lo necesitás, hacemos reposición semanal. Nada de stock parado.',
+            },
+            {
+              q: '¿Hay diferencia entre el grande y el pequeño en cocina?',
+              a: 'Mismo tiempo de fritura (3-4 min). El grande sirve para entrada compartida o individual. El pequeño es ideal para picada de bar o finger food en eventos.',
+            },
+            {
+              q: '¿Cuál es el costo por unidad?',
+              a: 'El pricing es mayorista escalonado por volumen. Te lo pasamos por WhatsApp después de la primera consulta — depende del formato y la cantidad mensual estimada.',
+            },
+          ].map((item) => (
+            <details class="card" style="cursor: pointer;">
+              <summary style="font-family: var(--font-display); font-size: 17px; color: var(--color-text-primary); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                <span>{item.q}</span>
+                <span style="color: var(--color-accent); font-size: 22px; font-weight: bold;">+</span>
+              </summary>
+              <p style="margin: 14px 0 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55;">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CTA FINAL */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="reveal" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid rgba(251,176,59,0.35); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); text-align: center; max-width: 900px; margin: 0 auto;">
+          <h2 style="font-size: var(--fs-h2); margin: 0 0 14px;">
+            Probá <span class="text-shimmer">sin riesgo</span>.
+          </h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px; margin: 0 auto;">
+            Primer pedido a consignación. Vendés primero, pagás después.
+          </p>
+          <div class="flex flex-wrap" style="gap: var(--space-3); justify-content: center; margin-top: var(--space-6);">
+            <a href="/#formulario" class="btn btn-primary btn-lg">Quiero ser revendedor<Icon name="arrow-right" size={18} /></a>
+            <a href={whatsappLinks.revendedor} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener noreferrer">
+              <Icon name="whatsapp" size={20} />
+              WhatsApp directo
+            </a>
+          </div>
+          <p style="font-size: 13px; color: var(--color-text-muted); margin-top: var(--space-5);">
+            ¿Querés saber más del modelo? <a href="/consignacion" style="color: var(--color-text-primary); border-bottom: 1px dotted var(--color-accent);">Cómo funciona la consignación →</a>
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>

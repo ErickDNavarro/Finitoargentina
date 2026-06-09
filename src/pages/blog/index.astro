@@ -1,0 +1,82 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const title = 'Blog · Tips para revendedores y dueños de bar';
+const description = 'Notas sobre cómo cocinar tequeños, cómo armar una entrada de carta, qué pedir a un proveedor, y cómo crecen los locales que los suman.';
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="contenido">
+    <section class="section" style="padding-top: 148px;">
+      <div class="container-finito">
+        <div style="max-width: 720px;">
+          <Eyebrow>Blog</Eyebrow>
+          <h1 class="heading-display mt-5 text-balance" style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1;">
+            Tips para tu <span class="text-shimmer">cocina</span> y tu carta.
+          </h1>
+          <p class="mt-6 text-lg text-text-primary/85 text-pretty leading-relaxed">
+            Notas cortas y accionables. Lo que aprendimos charlando con dueños de bar y restaurante.
+          </p>
+        </div>
+
+        {posts.length === 0 ? (
+          <p style="margin-top: var(--space-9); color: var(--color-text-muted); text-align: center;">
+            Próximamente — primer post en breve.
+          </p>
+        ) : (
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 min-w-0" style="gap: var(--space-6); margin-top: var(--space-8);">
+            {posts.map((post, i) => (
+              <a
+                href={`/blog/${post.id}`}
+                class={`card card-interactive card-padding-none reveal d${(i % 4) + 1}`}
+                style="overflow: hidden; display: flex; flex-direction: column; text-decoration: none;"
+                data-analytics={`blog-card-${post.id}`}
+              >
+                {post.data.cover && (
+                  <div class="relative" style="aspect-ratio: 16/9; overflow: hidden; border-bottom: 1px solid var(--border-subtle);">
+                    <img
+                      src={post.data.cover}
+                      alt={post.data.coverAlt ?? post.data.title}
+                      loading="lazy"
+                      style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.9s var(--ease-out);"
+                    />
+                    <div style="position: absolute; top: 14px; left: 14px;">
+                      <span class="badge badge-soft" style="backdrop-filter: blur(8px);">{post.data.tag}</span>
+                    </div>
+                  </div>
+                )}
+                <div style="padding: var(--space-5); display: flex; flex-direction: column; gap: 12px; flex: 1;">
+                  <h2 style="margin: 0; font-family: var(--font-display); font-size: 20px; line-height: 1.2; color: var(--color-text-primary); text-transform: none;">
+                    {post.data.title}
+                  </h2>
+                  <p style="margin: 0; color: var(--color-text-secondary); font-size: 14px; line-height: 1.55; flex: 1;">
+                    {post.data.description}
+                  </p>
+                  <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border-subtle); font-size: 12px; color: var(--color-text-muted); margin-top: auto;">
+                    <span>
+                      {post.data.pubDate.toLocaleDateString('es-AR', { day: 'numeric', month: 'short', year: 'numeric' })}
+                    </span>
+                    <span>{post.data.readingMinutes} min de lectura</span>
+                  </div>
+                </div>
+              </a>
+            ))}
+          </div>
+        )}
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>

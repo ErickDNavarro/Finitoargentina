@@ -1,0 +1,169 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const pubFmt = post.data.pubDate.toLocaleDateString('es-AR', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<Base title={post.data.title} description={post.data.description} ogImage={post.data.cover}>
+  <Header />
+  <main id="contenido">
+    {/* HERO del post */}
+    <article style="padding-top: 148px;">
+      <div class="container-finito" style="max-width: 760px;">
+        <div style="margin-bottom: var(--space-5);">
+          <a href="/blog" style="color: var(--color-text-muted); font-size: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/>
+            </svg>
+            Todas las notas
+          </a>
+        </div>
+
+        <Eyebrow>{post.data.tag}</Eyebrow>
+        <h1 class="heading-display mt-4 text-balance" style="font-size: clamp(2rem, 4.5vw, 3.4rem); line-height: 1.05;">
+          {post.data.title}
+        </h1>
+
+        <div style="margin-top: var(--space-5); display: flex; gap: var(--space-4); color: var(--color-text-muted); font-size: 14px;">
+          <span>{pubFmt}</span>
+          <span>·</span>
+          <span>{post.data.readingMinutes} min de lectura</span>
+          <span>·</span>
+          <span>{post.data.author}</span>
+        </div>
+      </div>
+
+      {post.data.cover && (
+        <div class="container-finito" style="max-width: 960px; margin-top: var(--space-7);">
+          <img
+            src={post.data.cover}
+            alt={post.data.coverAlt ?? post.data.title}
+            loading="eager"
+            style="width: 100%; aspect-ratio: 16/9; object-fit: cover; border-radius: var(--radius-lg); border: 1px solid var(--border-subtle);"
+          />
+        </div>
+      )}
+
+      {/* CONTENIDO DEL POST */}
+      <div class="container-finito blog-content" style="max-width: 720px; margin-top: var(--space-8); margin-bottom: var(--space-9);">
+        <Content />
+      </div>
+
+      {/* CTA INLINE */}
+      <div class="container-finito" style="max-width: 720px; margin-bottom: var(--space-9);">
+        <div style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid rgba(251,176,59,0.35); border-radius: var(--radius-lg); padding: var(--space-6); box-shadow: var(--shadow-md), var(--edge-light);">
+          <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 13px; color: var(--color-accent); letter-spacing: 0.1em;">Para tu local</div>
+          <h2 style="margin: 8px 0 14px; font-size: var(--fs-h3); color: var(--color-text-primary);">Probá tequeños venezolanos sin riesgo</h2>
+          <p style="margin: 0 0 var(--space-5); color: var(--color-text-secondary); font-size: 15px; line-height: 1.55;">
+            Te dejamos el primer pedido a consignación. Vendés primero, pagás después. Si no rota, lo retiramos.
+          </p>
+          <div class="flex flex-wrap" style="gap: var(--space-3);">
+            <a href="/#formulario" class="btn btn-primary">Pedí cotización<Icon name="arrow-right" size={16} /></a>
+            <a href={whatsappLinks.revendedor} class="btn btn-whatsapp" target="_blank" rel="noopener noreferrer">
+              <Icon name="whatsapp" size={18} />
+              WhatsApp directo
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>
+
+<style is:global>
+  .blog-content {
+    color: var(--color-text-primary);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+  .blog-content p { margin: 0 0 20px; color: var(--color-text-secondary); }
+  .blog-content strong { color: var(--color-text-primary); font-weight: 700; }
+  .blog-content h2 {
+    font-family: var(--font-display);
+    font-size: 26px;
+    margin: 40px 0 16px;
+    color: var(--color-text-primary);
+    text-transform: none;
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .blog-content h3 {
+    font-family: var(--font-display);
+    font-size: 20px;
+    margin: 28px 0 12px;
+    color: var(--color-text-primary);
+    text-transform: none;
+    line-height: 1.25;
+  }
+  .blog-content ul, .blog-content ol {
+    margin: 0 0 20px;
+    padding-left: 24px;
+    color: var(--color-text-secondary);
+  }
+  .blog-content li { margin: 0 0 8px; }
+  .blog-content a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--color-accent);
+    transition: color var(--dur-fast);
+  }
+  .blog-content a:hover { color: var(--color-accent-hover); }
+  .blog-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 24px;
+    font-size: 15px;
+  }
+  .blog-content th, .blog-content td {
+    padding: 10px 12px;
+    border: 1px solid var(--border-subtle);
+    text-align: left;
+  }
+  .blog-content th {
+    background: var(--color-surface-card);
+    color: var(--color-text-primary);
+    font-family: var(--font-display);
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+  }
+  .blog-content code {
+    background: var(--color-surface-inset);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: var(--color-accent);
+  }
+  .blog-content hr {
+    border: none;
+    border-top: 1px solid var(--border-subtle);
+    margin: 32px 0;
+  }
+</style>
