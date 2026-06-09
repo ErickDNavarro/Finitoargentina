@@ -113,7 +113,8 @@ export const social = {
  * Meta SEO base. Se sobrescribe por página vía props del layout.
  */
 export const seoMeta = {
-  defaultTitle: 'Finito Argentina · Tequeños venezolanos al por mayor en CABA y Zona Norte',
+  /** ≤60 chars — Google trunca más allá. Keyword first, brand al final. */
+  defaultTitle: 'Tequeños al por mayor en CABA y Zona Norte · Finito',
   titleTemplate: '%s · Finito Argentina',
   defaultDescription:
     'Tequeños venezolanos al por mayor para restaurantes, bares y eventos en CABA y Zona Norte. Primer pedido a consignación: sin riesgo, sin stock parado. Cotizá por WhatsApp.',

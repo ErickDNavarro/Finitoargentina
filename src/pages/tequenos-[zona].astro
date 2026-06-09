@@ -1,0 +1,202 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { zonas, type Zona } from '@/data/zonas';
+
+export async function getStaticPaths() {
+  return zonas.map((zona) => ({
+    params: { zona: zona.slug },
+    props: { zona },
+  }));
+}
+
+interface Props { zona: Zona }
+const { zona } = Astro.props;
+
+const title = `Tequeños al por mayor en ${zona.nombre} | Finito Argentina`;
+const description = `Proveedor de tequeños venezolanos al por mayor en ${zona.nombreCompleto}. Primer pedido a consignación, sin riesgo de stock parado. Entrega ${zona.entrega.toLowerCase()}. Para restaurantes, bares y eventos.`;
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="contenido">
+    {/* HERO específico de zona */}
+    <section class="section relative isolate overflow-hidden" style="padding-top: 148px;">
+      <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(251,176,59,0.18); top: -120px; right: -80px;"></div>
+
+      <div class="container-finito relative z-[1]">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] lg:items-center gap-12 min-w-0">
+          <div>
+            <Eyebrow>Mayorista · {zona.partido}</Eyebrow>
+            <h1 class="heading-display mt-5 text-balance" style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1;">
+              Tequeños al por mayor en <span class="text-shimmer">{zona.nombre}</span>
+            </h1>
+            <p class="mt-6 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              {zona.pitch}
+            </p>
+            <p class="mt-4 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              <strong>Entrega: {zona.entrega}.</strong> Primer pedido a consignación — vendés primero, pagás después.
+            </p>
+            <div class="mt-8 flex flex-wrap" style="gap: var(--space-3);">
+              <a href="/#formulario" class="btn btn-primary btn-lg">
+                Pedí tu cotización
+                <Icon name="arrow-right" size={18} />
+              </a>
+              <a
+                href={whatsappLinks.revendedor}
+                class="btn btn-whatsapp btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="whatsapp" size={20} />
+                WhatsApp directo
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <PhotoFrame
+              src="/fotos/hero.jpg"
+              alt={`Tequeños venezolanos al por mayor para ${zona.nombre}`}
+              placeholder="Foto: tequeños recién fritos"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* PARA QUIÉN EN ESTA ZONA */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Para quién</Eyebrow></div>
+          <h2 style="text-align: center;">Para tu local en {zona.nombre}</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 min-w-0" style="gap: var(--space-5); margin-top: var(--space-7);">
+          <div class="card">
+            <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 18px; color: var(--color-text-primary);">Restaurantes</div>
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-top: 10px; line-height: 1.55;">
+              Entrada de carta que sale en 4 minutos del freidor. Margen alto, prep nula, foto que vende.
+            </p>
+          </div>
+          <div class="card card-accent" style="background: linear-gradient(180deg, rgba(251,176,59,0.10), var(--color-surface-card));">
+            <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 18px; color: var(--color-text-primary);">Bares y cervecerías</div>
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-top: 10px; line-height: 1.55;">
+              Picada premium que se come con la mano. Rotación alta en after-office, marida con cualquier cerveza.
+            </p>
+          </div>
+          <div class="card">
+            <div style="font-family: var(--font-display); text-transform: uppercase; font-size: 18px; color: var(--color-text-primary);">Eventos y catering</div>
+            <p style="font-size: 14px; color: var(--color-text-secondary); margin-top: 10px; line-height: 1.55;">
+              Cumpleaños, casamientos, eventos corporativos. Llegan calientes y crocantes en {zona.nombre}.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* PROPUESTA DE VALOR */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center" style="gap: var(--space-7);">
+          <div class="reveal">
+            <Eyebrow>Por qué Finito</Eyebrow>
+            <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">
+              Receta venezolana de verdad. <span class="text-shimmer">No industrial.</span>
+            </h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 480px;">
+              Masa fina que cruje, queso que estira de verdad, fritura prolija.
+              Eso es lo que tu cliente nota al primer mordisco. Y eso es lo que vuelve a pedir.
+            </p>
+            <ul style="list-style: none; padding: 0; margin: 26px 0 0; display: flex; flex-direction: column; gap: 14px;">
+              {[
+                'Primer pedido a consignación (sin riesgo de stock parado)',
+                `Entrega ${zona.entrega.toLowerCase()} desde Pilar`,
+                'Margen alto + pricing escalonado por volumen',
+                'Sin mínimos imposibles para empezar',
+              ].map((punto) => (
+                <li style="display: flex; gap: 12px; align-items: center; color: var(--color-text-primary); font-weight: 500;">
+                  <span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+                    <Icon name="check" size={15} />
+                  </span>
+                  {punto}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="reveal d2 relative">
+            <PhotoFrame
+              src="/fotos/queso-estira.jpg"
+              alt="Tequeño abierto, queso estirándose"
+              placeholder="Foto: queso que estira"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CTA + ZONAS CERCANAS */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="reveal" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid rgba(251,176,59,0.35); border-radius: var(--radius-xl); padding: clamp(28px, 5vw, 56px); box-shadow: var(--shadow-lg), var(--edge-light); text-align: center; max-width: 900px; margin: 0 auto;">
+          <h2 style="font-size: var(--fs-h2); margin: 0 0 14px;">
+            ¿Tu local está en <span class="text-shimmer">{zona.nombre}</span>?
+          </h2>
+          <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px; margin: 0 auto;">
+            Coordinamos el primer pedido a consignación en {zona.entrega.toLowerCase()}. Sin riesgo, sin compromiso.
+          </p>
+          <div class="flex flex-wrap" style="gap: var(--space-3); justify-content: center; margin-top: var(--space-6);">
+            <a href="/#formulario" class="btn btn-primary btn-lg">Quiero ser revendedor<Icon name="arrow-right" size={18} /></a>
+            <a href={whatsappLinks.revendedor} class="btn btn-whatsapp btn-lg" target="_blank" rel="noopener noreferrer">
+              <Icon name="whatsapp" size={20} />
+              WhatsApp directo
+            </a>
+          </div>
+        </div>
+
+        {/* Internal links a zonas cercanas */}
+        <div style="max-width: 900px; margin: var(--space-7) auto 0; text-align: center;">
+          <div class="overline" style="margin-bottom: var(--space-3);">También entregamos en</div>
+          <div class="flex flex-wrap" style="gap: 10px; justify-content: center;">
+            {zona.cercanos.map((cercano) => {
+              const cercanoZona = zonas.find((z) => z.nombre === cercano);
+              if (cercanoZona) {
+                return (
+                  <a
+                    href={`/tequenos-${cercanoZona.slug}`}
+                    class="badge badge-outline"
+                    style="text-decoration: none; padding: 8px 14px;"
+                  >
+                    {cercano}
+                  </a>
+                );
+              }
+              return (
+                <span class="badge badge-outline" style="padding: 8px 14px;">
+                  {cercano}
+                </span>
+              );
+            })}
+            <a href="/" class="badge badge-soft" style="text-decoration: none; padding: 8px 14px;">
+              Ver todas las zonas →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>

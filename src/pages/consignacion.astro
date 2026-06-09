@@ -1,0 +1,290 @@
+---
+import Base from '@/layouts/Base.astro';
+import Header from '@/components/Header.astro';
+import Footer from '@/components/Footer.astro';
+import WhatsappFloat from '@/components/WhatsappFloat.astro';
+import ScrollReveal from '@/components/ScrollReveal.astro';
+import Eyebrow from '@/components/Eyebrow.astro';
+import Icon from '@/components/Icon.astro';
+import PhotoFrame from '@/components/PhotoFrame.astro';
+import { whatsappLinks } from '@/lib/whatsapp';
+import { businessInfo } from '@/data/seo';
+
+const title = 'Tequeños a consignación: probá sin riesgo de stock parado';
+const description =
+  'Te dejamos el primer pedido de tequeños sin cobrar. Vendés primero, pagás solo lo que rotó. Si no rota, lo retiramos. Sin stock parado, sin deuda — para restaurantes y bares en CABA y Zona Norte.';
+---
+
+<Base title={title} description={description}>
+  <Header />
+  <main id="contenido">
+    {/* HERO */}
+    <section class="section relative isolate overflow-hidden" style="padding-top: 148px;">
+      <div class="glow-blob" style="width: 520px; height: 520px; background: rgba(251,176,59,0.18); top: -120px; right: -80px;"></div>
+
+      <div class="container-finito relative z-[1]">
+        <div class="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] lg:items-center gap-12 min-w-0">
+          <div>
+            <Eyebrow>Sin riesgo, en serio</Eyebrow>
+            <h1 class="heading-display mt-5 text-balance" style="font-size: clamp(2.4rem, 5vw, 4rem); line-height: 1;">
+              Tequeños a <span class="text-shimmer">consignación</span>: probá sin poner un peso.
+            </h1>
+            <p class="mt-6 text-lg text-text-primary/85 text-pretty leading-relaxed max-w-xl">
+              El primer pedido te lo dejamos sin cobrar. Vendés primero, pagás después.
+              Si no rota, lo retiramos sin drama. Cero stock parado, cero deuda.
+            </p>
+            <div class="mt-8 flex flex-wrap" style="gap: var(--space-3);">
+              <a href="/#formulario" class="btn btn-primary btn-lg">
+                Quiero probar sin riesgo
+                <Icon name="arrow-right" size={18} />
+              </a>
+              <a
+                href={whatsappLinks.revendedor}
+                class="btn btn-whatsapp btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="whatsapp" size={20} />
+                Hablar por WhatsApp
+              </a>
+            </div>
+          </div>
+          <div class="relative">
+            <PhotoFrame
+              src="/fotos/hero.jpg"
+              alt="Tequeño venezolano recién frito"
+              placeholder="Foto: tequeños recién fritos"
+              aspect="4/5"
+              class="max-w-md mx-auto"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* CÓMO FUNCIONA — 3 PASOS */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Cómo funciona</Eyebrow></div>
+          <h2 style="text-align: center;">3 pasos. Cero billetera.</h2>
+        </div>
+
+        <ol class="grid grid-cols-1 md:grid-cols-3 list-none p-0 min-w-0" style="gap: var(--space-5); margin: var(--space-8) 0 0;">
+          {[
+            {
+              n: '01',
+              t: 'Te lo dejamos',
+              d: 'Coordinamos cuánto y qué formato. Te llega congelado, listo para el freidor. No abrís la billetera.',
+            },
+            {
+              n: '02',
+              t: 'Lo freís y lo vendés',
+              d: 'Sale en 4 minutos. Lo cobrás con tu margen. Ves cómo rota con tu público real.',
+            },
+            {
+              n: '03',
+              t: 'Pagás solo lo que rotó',
+              d: 'Si rota, pedís más. Si no rota, lo retiramos sin drama — cero deuda, cero stock parado.',
+            },
+          ].map((p, i) => (
+            <li class={`reveal d${i + 1}`}>
+              <div class="card h-full">
+                <div style="font-family: var(--font-display); font-size: 14px; color: var(--color-accent); letter-spacing: 0.1em;">
+                  {p.n}
+                </div>
+                <h3 style="font-family: var(--font-display); text-transform: uppercase; font-size: 19px; margin: 12px 0 12px; color: var(--color-text-primary); line-height: 1.18;">
+                  {p.t}
+                </h3>
+                <p style="margin: 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55;">{p.d}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    {/* POR QUÉ EXISTE ESTE MODELO */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:items-center" style="gap: var(--space-7);">
+          <div class="reveal">
+            <Eyebrow>Por qué hacemos esto</Eyebrow>
+            <h2 style="font-size: var(--fs-h2); margin: 16px 0 14px;">
+              Sabemos lo que pensás cuando aparece un proveedor nuevo.
+            </h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px;">
+              "¿Y si compro y no se vende?" "¿Me quedo con la mercadería?" "¿Cuánto tarda en rotar?"
+            </p>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px; margin-top: 12px;">
+              Lo escuchamos en cada reunión con dueños de restaurante y bar. Por eso armamos el modelo así:
+              vos probás con tu público, nosotros confiamos en el producto.
+            </p>
+            <p style="color: var(--color-text-primary); font-size: var(--fs-body-lg); max-width: 520px; margin-top: 12px; font-weight: 600;">
+              Si el tequeño no se mueve, no es tu problema. Es nuestro.
+            </p>
+          </div>
+          <div class="reveal d2">
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px;">
+              {[
+                'No pagás nada por adelantado',
+                'Sin mínimos imposibles para empezar',
+                'Te retiramos lo que no rotó',
+                'Reposición flexible: pedís cuando lo necesitás',
+                'Cobramos solo después de que vendiste',
+                'Sin contratos ni compromiso de volumen',
+              ].map((punto) => (
+                <li style="display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--color-surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); color: var(--color-text-primary);">
+                  <span style="flex: none; width: 26px; height: 26px; border-radius: 50%; background: var(--orange-glow); color: var(--color-accent); display: inline-flex; align-items: center; justify-content: center;">
+                    <Icon name="check" size={15} />
+                  </span>
+                  {punto}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* COMPARATIVA */}
+    <section class="section section-alt">
+      <div class="container-finito">
+        <h2 style="text-align: center; font-family: var(--font-display); text-transform: uppercase; font-size: var(--fs-h2); margin: 0 0 var(--space-6); color: var(--color-text-primary);">
+          Lo que cambia <span style="color: var(--color-accent);">en la práctica</span>
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 min-w-0 max-w-4xl mx-auto" style="gap: var(--space-4);">
+          <div class="card" style="opacity: 0.85;">
+            <div class="overline" style="margin-bottom: var(--space-4); color: var(--color-text-dim);">
+              Con cualquier otro proveedor
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              {[
+                'Comprás stock antes de saber si rota',
+                'Si no se vende, te lo comés vos',
+                'Mínimos altos o precio caro, elegí',
+                'Deuda con el proveedor desde el día 1',
+              ].map((it) => (
+                <li style="display: flex; align-items: flex-start; gap: 12px; color: var(--color-text-primary); font-size: 15px;">
+                  <span style="flex: none; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: rgba(224,83,61,0.12); color: var(--color-danger);">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                  </span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="card" style="position: relative; border-color: rgba(251,176,59,0.35); background: linear-gradient(180deg, rgba(251,176,59,0.06), var(--color-surface-card));">
+            <span class="badge badge-accent" style="position: absolute; top: 14px; right: 14px;">Así</span>
+            <div class="overline" style="margin-bottom: var(--space-4); color: var(--color-accent);">
+              Con Finito (consignación)
+            </div>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px;">
+              {[
+                'El primer pedido va sin cobrar',
+                'Vendés primero, pagás después',
+                'Cero stock parado, cero deuda',
+                'Si no rota, lo retiramos sin drama',
+              ].map((it) => (
+                <li style="display: flex; align-items: flex-start; gap: 12px; color: var(--color-text-primary); font-size: 15px;">
+                  <span style="flex: none; width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; background: var(--orange-glow); color: var(--color-accent);">
+                    <Icon name="check" size={14} />
+                  </span>
+                  <span>{it}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {/* FAQ */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="section-head mx-auto reveal" style="text-align: center; align-items: center;">
+          <div style="display: flex; justify-content: center;"><Eyebrow>Preguntas frecuentes</Eyebrow></div>
+          <h2 style="text-align: center;">Lo que más nos preguntan</h2>
+        </div>
+        <div style="max-width: 740px; margin: var(--space-7) auto 0; display: flex; flex-direction: column; gap: var(--space-3);">
+          {[
+            {
+              q: '¿Cuántas unidades incluye el primer pedido a consignación?',
+              a: 'Lo coordinamos según el tamaño de tu local y el volumen estimado. Suelen ser entre 40 y 100 unidades para arrancar — lo suficiente para que pruebes 1-2 semanas sin presión.',
+            },
+            {
+              q: '¿Qué pasa si en 2 semanas no rotó nada?',
+              a: 'Pasamos por tu local, retiramos la mercadería que no se vendió, y listo. Sin cargo, sin facturación. Aprendimos algo: o tu público no es ideal para este producto, o no se comunicó bien la entrada en la carta.',
+            },
+            {
+              q: '¿Hay un compromiso de seguir pidiendo?',
+              a: 'Cero. La consignación arranca como una prueba. Si funciona, seguimos. Si no, nada se firma. Tu cocina decide.',
+            },
+            {
+              q: '¿En cuánto tiempo entregan?',
+              a: 'En CABA y Zona Norte coordinamos entrega en 24-48 hs hábiles desde la confirmación. Si tu negocio queda en Pilar, Del Viso o Manuel Alberti, el mismo día.',
+            },
+            {
+              q: '¿Cómo se manejan los precios?',
+              a: 'El precio mayorista es escalonado por volumen. Te lo pasamos por WhatsApp después de la primera consulta — depende de qué formato pidas (grandes 15cm vs pequeños 7,5cm) y de tu zona.',
+            },
+            {
+              q: '¿Qué pasa después del primer pedido a consignación?',
+              a: 'Si el tequeño rota, el siguiente pedido lo pagás de antemano o contra entrega (lo que prefieras). Ya no es a consignación porque ya probaste. Pero los términos los acordamos juntos.',
+            },
+          ].map((item) => (
+            <details class="card" style="cursor: pointer;">
+              <summary style="font-family: var(--font-display); font-size: 17px; color: var(--color-text-primary); list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 12px;">
+                <span>{item.q}</span>
+                <span style="color: var(--color-accent); font-size: 22px; font-weight: bold;">+</span>
+              </summary>
+              <p style="margin: 14px 0 0; color: var(--color-text-secondary); font-size: 15px; line-height: 1.55;">
+                {item.a}
+              </p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    {/* CTA FINAL */}
+    <section class="section">
+      <div class="container-finito">
+        <div class="panel-xl reveal" style="background: linear-gradient(150deg, var(--color-surface-raised), var(--color-eerie-900)); border: 1px solid rgba(251,176,59,0.35); box-shadow: var(--shadow-lg), var(--edge-light); position: relative; overflow: hidden; text-align: center; max-width: 900px; margin: 0 auto;">
+          <div class="glow-blob" style="width: 380px; height: 380px; background: rgba(251,176,59,0.18); top: -120px; left: 50%; transform: translateX(-50%);"></div>
+          <div style="position: relative; z-index: 1;">
+            <h2 style="font-size: var(--fs-h2); margin: 0 0 14px;">
+              ¿Probás <span class="text-shimmer">sin riesgo</span>?
+            </h2>
+            <p style="color: var(--color-text-secondary); font-size: var(--fs-body-lg); max-width: 520px; margin: 0 auto;">
+              Te coordinamos el primer pedido en 24 hs. Cero billetera, cero compromiso.
+            </p>
+            <div class="flex flex-wrap" style="gap: var(--space-3); justify-content: center; margin-top: var(--space-6);">
+              <a href="/#formulario" class="btn btn-primary btn-lg">
+                Quiero ser revendedor
+                <Icon name="arrow-right" size={18} />
+              </a>
+              <a
+                href={whatsappLinks.revendedor}
+                class="btn btn-whatsapp btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="whatsapp" size={20} />
+                WhatsApp directo
+              </a>
+            </div>
+            <p style="font-size: 13px; color: var(--color-text-muted); margin-top: var(--space-5);">
+              O mandanos un mail: <a href={`mailto:${businessInfo.salesEmail}`} style="color: var(--color-text-primary); border-bottom: 1px dotted var(--color-accent);">{businessInfo.salesEmail}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <WhatsappFloat />
+  <ScrollReveal />
+</Base>
